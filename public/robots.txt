@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://zelta-table-and-sauna.lovable.app/sitemap.xml
+Sitemap: https://zelta-pakavs.ritm-studio.workers.dev/sitemap.xml

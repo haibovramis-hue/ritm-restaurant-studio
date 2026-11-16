@@ -2,7 +2,7 @@ import { MENU } from "./menu";
 import { priceCents } from "./basket";
 
 /** Single place to change when the site gets its own domain. */
-export const SITE_URL = "https://zelta-table-and-sauna.lovable.app";
+export const SITE_URL = "https://zelta-pakavs.ritm-studio.workers.dev";
 export const SHARE_IMAGE = `${SITE_URL}/og-image.jpg`;
 
 export function pageHead(path: string, title: string, description: string) {
