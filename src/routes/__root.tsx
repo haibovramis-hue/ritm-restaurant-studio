@@ -36,7 +36,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:locale:alternate", content: "ru_RU" }, { property: "og:locale:alternate", content: "en_GB" }, { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
-      { rel: "stylesheet", href: appCss }, { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "stylesheet", href: appCss }, { rel: "icon", href: "/logo-zp.png", type: "image/png" }, { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" }, { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Literata:ital,wght@1,400;1,500&family=Onest:wght@400;500;600&family=Sofia+Sans+Extra+Condensed:wght@800;900&display=swap" },
     ],

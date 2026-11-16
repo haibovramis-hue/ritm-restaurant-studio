@@ -10,6 +10,7 @@ import { DishShowcase } from "@/components/site/DishShowcase";
 import { ArchPhoto, PosterHeading, SectionLabel } from "@/components/site/Design";
 import { Button } from "@/components/ui/button";
 import { IMG } from "@/lib/images";
+import { MENU } from "@/lib/menu";
 import { SHARE_IMAGE, SITE_URL } from "@/lib/seo";
 import { rigaToday } from "@/lib/dates";
 
@@ -40,20 +41,19 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-function EntryCard({ index, title, detail, img, to, onClick }: { index: number; title: string; detail?: ReactNode; img: string; to?: "/banquets" | "/sauna"; onClick?: () => void }) {
+function EntryCard({ title, detail, img, to, onClick }: { title: string; detail?: ReactNode; img: string; to?: "/banquets" | "/sauna"; onClick?: () => void }) {
   const inner = <>
     <img src={img} alt="" width={1600} height={900} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
     <span className="absolute inset-0 bg-gradient-to-t from-coal/90 via-coal/30 to-transparent" aria-hidden="true" />
-    <span className="relative flex w-full items-end justify-between gap-3 p-5 text-paper"><span className="min-w-0"><span className="block text-[11px] font-semibold tabular-nums tracking-[0.16em] text-brass">0{index}</span><span className="poster-type mt-1 block text-[clamp(2rem,7vw,3rem)]">{title}</span>{detail && <span className="mt-2 block text-[13px] leading-snug text-paper/80">{detail}</span>}</span><ArrowRight className="h-6 w-6 shrink-0 transition-transform group-hover:translate-x-1" aria-hidden="true" /></span>
+    <span className="relative flex w-full items-end justify-between gap-3 p-5 text-paper"><span className="min-w-0"><span className="poster-type block text-[clamp(2rem,7vw,3rem)]">{title}</span>{detail && <span className="mt-2 block text-[13px] leading-snug text-paper/80">{detail}</span>}</span><ArrowRight className="h-6 w-6 shrink-0 transition-transform group-hover:translate-x-1" aria-hidden="true" /></span>
   </>;
-  const cls = "group relative flex min-h-[220px] w-full items-end overflow-hidden bg-coal text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember md:min-h-[360px]";
+  const cls = "group relative flex min-h-[240px] w-full items-end overflow-hidden bg-coal text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember md:min-h-[360px]";
   if (onClick) return <button type="button" onClick={onClick} className={cls}>{inner}</button>;
   return <Link to={to!} className={cls}>{inner}</Link>;
 }
-function IntentRow({ index, title, detail, thumb, to, hash, onClick }: { index: number; title: string; detail?: ReactNode; thumb?: string; to?: "/banquets" | "/sauna" | "/menu"; hash?: string; onClick?: () => void }) {
+function IntentRow({ title, detail, thumb, to, hash, onClick }: { title: string; detail?: ReactNode; thumb?: string; to?: "/banquets" | "/sauna" | "/menu"; hash?: string; onClick?: () => void }) {
   const inner = <>
-    <span className="w-6 shrink-0 self-start pt-1 text-[11px] font-semibold tabular-nums">0{index}</span>
-    <span className="min-w-0 flex-1"><span className="poster-type block text-[clamp(2rem,8.5vw,4.2rem)]">{title}</span>{detail && <span className="mt-2 block max-w-xl text-[13px] leading-snug opacity-75">{detail}</span>}</span>
+    <span className="min-w-0 flex-1"><span className="poster-type block text-[clamp(1.7rem,6vw,2.6rem)]">{title}</span>{detail && <span className="mt-2 block max-w-xl text-[13px] leading-snug opacity-75">{detail}</span>}</span>
     {thumb && <ArchPhoto src={thumb} alt={title} width={787} height={854} className="h-24 w-20 shrink-0 self-center sm:h-28 sm:w-24" />}
     <ArrowRight className="h-6 w-6 shrink-0 self-center transition-transform group-hover:translate-x-1" aria-hidden="true" />
   </>;
@@ -61,6 +61,8 @@ function IntentRow({ index, title, detail, thumb, to, hash, onClick }: { index: 
   if (onClick) return <button type="button" onClick={onClick} className={cls}>{inner}</button>;
   return <Link to={to!} {...(hash ? { hash } : {})} className={cls}>{inner}</Link>;
 }
+
+const dishCount = MENU.reduce((n, c) => n + c.items.length, 0);
 
 function Index() {
   const { l, lang } = useI18n();
@@ -97,28 +99,35 @@ function Index() {
           <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noreferrer" className="mt-5 inline-flex min-h-11 items-center text-[13px] font-medium text-paper/85 hover:text-paper">{GOOGLE_RATING} ★ · {GOOGLE_REVIEWS} Google · Imanta · {lang === "lv" ? "kopš" : lang === "ru" ? "с" : "since"} 1999</a>
         </div>
       </section>
-      <div className="border-y border-paper/15 bg-coal px-5 text-paper"><ul className="mx-auto flex max-w-[1440px] flex-wrap gap-x-6 gap-y-1 py-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-paper/70">{P.marquee.map((fact) => <li key={fact.en}>{l(fact)}</li>)}</ul></div>
-
-      <section className="section-pad bg-coal px-5 text-paper">
+      <section className="bg-coal px-5 pb-14 pt-6 text-paper md:pb-20 md:pt-10">
         <div className="mx-auto max-w-[1440px]">
-          <SectionLabel number="">{l(P.start)}</SectionLabel>
-          <PosterHeading className="mb-8 mt-4">{l(P.intentTitle)}</PosterHeading>
-          {seasonal && <Link to="/banquets" search={{ occasion: "xmas" }} hash="request" className="mb-6 flex min-h-14 items-center justify-between gap-3 border-y border-paper/20 px-4 py-3 text-sm font-semibold hover:bg-paper hover:text-coal"><span>{l(P.season)}</span><ArrowRight className="shrink-0" /></Link>}
+          {seasonal && <Link to="/banquets" search={{ occasion: "xmas" }} hash="request" className="mb-5 flex min-h-14 items-center justify-between gap-3 border border-ember/60 px-4 py-3 text-sm font-semibold text-ember transition-colors hover:bg-ember hover:text-paper"><span>{l(P.season)}</span><ArrowRight className="shrink-0" /></Link>}
           <div className="grid gap-3 md:grid-cols-3">
-            <EntryCard index={1} title={l(P.intents[0]!.title)} img={IMG.shashlikPlate} onClick={openBooking} detail={<><OpenStatus /><span className="ml-2">{l(SIMPLE.hours)}</span></>} />
-            <EntryCard index={2} title={l(P.intents[1]!.title)} img={IMG.banquetTables} to="/banquets" detail={l(P.intents[1]!.detail!)} />
-            <EntryCard index={3} title={l(P.intents[2]!.title)} img={IMG.zpPirts} to="/sauna" detail={l(P.intents[2]!.detail!)} />
+            <EntryCard title={l(P.intents[0]!.title)} img={IMG.shashlikPlate} onClick={openBooking} detail={<OpenStatus />} />
+            <EntryCard title={l(P.intents[1]!.title)} img={IMG.banquetTables} to="/banquets" detail={l(P.intents[1]!.detail!)} />
+            <EntryCard title={l(P.intents[2]!.title)} img={IMG.zpPirts} to="/sauna" detail={l(P.intents[2]!.detail!)} />
           </div>
-          <div className="mt-3 border-t border-paper/20">
-            <IntentRow index={4} title={l(P.intents[3]!.title)} detail={l(P.intents[3]!.detail!)} to="/banquets" hash="memorial" />
-            <IntentRow index={5} title={l(P.intents[4]!.title)} detail={l(P.intents[4]!.detail!)} to="/menu" />
-          </div>          {event && <Link to="/events" className="mt-5 flex min-h-12 items-center gap-2 font-semibold text-ember">{l(P.tonight)}: {l(event[1])}<ArrowRight className="h-5 w-5" /></Link>}
+          <div className="mt-4 border-t border-paper/15">
+            <IntentRow title={l(P.intents[3]!.title)} detail={l(P.intents[3]!.detail!)} to="/banquets" hash="memorial" />
+            <IntentRow title={l(P.intents[4]!.title)} detail={l(P.intents[4]!.detail!)} to="/menu" />
+          </div>
+          {event && <Link to="/events" className="mt-5 flex min-h-12 items-center gap-2 font-semibold text-ember">{l(P.tonight)}: {l(event[1])}<ArrowRight className="h-5 w-5" /></Link>}
         </div>
       </section>
 
       <section className="section-pad bg-coal px-5 text-paper">
-        <div className="mx-auto mb-8 flex max-w-5xl flex-wrap items-end justify-between gap-4"><div><SectionLabel number="">{l(P.menuCaption)}</SectionLabel><PosterHeading className="mt-4">{l(P.chefTitle)}</PosterHeading></div><Link to="/menu" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-brass hover:text-paper">{l(P.fullMenu)}<ArrowRight className="h-4 w-4" /></Link></div>
+        <div className="mx-auto mb-8 max-w-5xl">
+          <SectionLabel number="">{l(P.menuCaption)}</SectionLabel>
+          <PosterHeading className="mt-4">{l(P.chefTitle)}</PosterHeading>
+          <p className="mt-4 max-w-xl font-voice text-lg italic leading-snug text-paper/75 md:text-xl">{l(P.chefSub)}</p>
+        </div>
         <DishShowcase />
+        <div className="mx-auto mt-10 max-w-5xl">
+          <Link to="/menu" className="group flex min-h-[72px] w-full items-center justify-between gap-4 border-2 border-brass px-6 py-4 transition-colors hover:bg-brass hover:text-coal">
+            <span className="min-w-0"><span className="poster-type block text-[clamp(1.6rem,5.5vw,2.4rem)]">{l(P.fullMenu)}</span><span className="mt-1 block text-[13px] text-paper/70 group-hover:text-coal/70">{dishCount} {l(P.dishesWord)} · {MENU.length} {l(P.categoriesWord)}</span></span>
+            <ArrowRight className="h-7 w-7 shrink-0 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+          </Link>
+        </div>
       </section>
 
       <section className="section-pad relative overflow-hidden bg-paper px-5 text-coal">
@@ -138,8 +147,6 @@ function Index() {
       <section className="bg-coal px-5 py-14 text-paper md:py-20"><div className="mx-auto max-w-[1440px]"><PosterHeading className="mb-8">{l(P.eveningTitle)}</PosterHeading><div className="snap-pad -mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-3">{[IMG.shashlikCoals, IMG.hallWedding, IMG.gazebo, IMG.banquetTables, IMG.zpPirts].map((src, i) => <figure key={src} className="relative aspect-[4/5] w-[72vw] max-w-[360px] shrink-0 snap-start overflow-hidden bg-coal-2 md:w-[26%]"><img src={src} alt="" loading="lazy" decoding="async" className="photo-grade h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-t from-coal/80 via-transparent to-transparent" aria-hidden="true" /><figcaption className="poster-type absolute bottom-4 left-4 text-3xl">{l(P.evening[i]!)}</figcaption></figure>)}</div></div></section>
 
       <section className="border-t border-paper/15 bg-coal px-5 py-12 text-paper md:py-16"><dl className="mx-auto grid max-w-6xl grid-cols-3 divide-x divide-paper/15 text-center">{P.stats.map((s) => <div key={s.n} className="px-2"><dt className="font-display text-[clamp(2.5rem,9vw,5.5rem)] font-black leading-none tabular-nums text-brass">{s.n}</dt><dd className="mt-2 text-[11px] font-semibold uppercase tracking-[0.12em] md:text-sm">{l(s.t)}</dd></div>)}</dl></section>
-
-      <section className="relative h-[46svh] min-h-[280px] overflow-hidden bg-coal text-paper md:h-[62vh]"><img src={IMG.terrace} alt={l(P.terraceCaption)} width={1600} height={900} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-t from-coal/85 via-coal/20 to-transparent" aria-hidden="true" /><p className="poster-type relative mx-auto flex h-full max-w-[1440px] items-end px-5 pb-8 text-[clamp(2rem,6vw,4.5rem)]">{l(P.terraceCaption)}</p></section>
 
       <section id="contacts" className="section-pad scroll-mt-[60px] bg-coal px-5 text-paper">
         <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-2">
