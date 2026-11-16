@@ -11,6 +11,7 @@ export const B = {
     tr("Vasarā ar terasi līdz 300", "Летом с террасой до 300", "Up to 300 with the summer terrace"),
     tr("Bezmaksas stāvvieta", "Бесплатная парковка", "Free parking"),
   ],
+  hallCaption: tr("Zāle, kas gaida jūsu svētkus", "Зал, который ждёт ваш праздник", "A hall waiting for your celebration"),
   occasions: [
     tr("Kāzas", "Свадьба", "Wedding"), tr("Jubileja", "Юбилей", "Anniversary / birthday"), tr("Kristības", "Крестины", "Christening"),
     tr("Korporatīvais pasākums", "Корпоратив", "Corporate event"), tr("Bērnu svētki", "Детский праздник", "Kids’ party"),
@@ -51,6 +52,7 @@ export const S = {
   book: tr("Rezervācija", "Бронирование", "Booking"), call: tr("Zvanīt", "Позвонить", "Call"), wa: tr("WhatsApp", "WhatsApp", "WhatsApp"),
   waMsg: tr("ZP Pirts rezervācija", "Бронирование ZP Pirts", "ZP Pirts booking"),
   contact: tr("Kontaktpersona", "Контактное лицо", "Contact person"),
+  cabin: tr("Atsevišķa māja pagalmā", "Отдельный домик во дворе", "A cabin of its own in the yard"),
   food: tr("Ēdienu pasūtiet tieši no restorāna — atnesīsim uz pirti.", "Еду заказывайте прямо из ресторана — принесём в баню.", "Order food straight from the restaurant — we bring it to the banya."),
 };
 

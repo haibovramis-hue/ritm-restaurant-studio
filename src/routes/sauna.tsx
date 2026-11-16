@@ -25,6 +25,11 @@ function Sauna() {
         <ul className="mx-auto grid max-w-3xl grid-cols-1 gap-x-5 text-sm sm:grid-cols-2">{S.features.map((x) => <li key={x.en} className="flex min-h-14 gap-2 border-b border-coal/20 py-3"><Check className="mt-0.5 h-4 w-4 shrink-0 text-ember" />{l(x)}</li>)}</ul>
         <p className="mx-auto mt-6 max-w-3xl text-muted-foreground">{l(S.food)}</p>
       </section>
+      <section className="relative h-[42svh] min-h-[260px] overflow-hidden bg-coal text-paper md:h-[56vh]">
+        <img src={IMG.banyaCabin} alt={l(S.title)} width={1400} height={1866} loading="lazy" decoding="async" className="photo-grade absolute inset-0 h-full w-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-t from-coal/85 via-coal/20 to-transparent" aria-hidden="true" />
+        <p className="poster-type relative mx-auto flex h-full max-w-6xl items-end px-5 pb-7 text-[clamp(1.6rem,5vw,3rem)]">{l(S.cabin)}</p>
+      </section>
       <section id="book" className="scroll-mt-[60px] bg-pine px-4 py-12 text-paper md:py-20">
         <form onSubmit={submit} className="mx-auto max-w-xl border border-paper/30 bg-paper p-6 text-coal md:p-8">
           <p className="font-semibold">{l(S.price)}</p>

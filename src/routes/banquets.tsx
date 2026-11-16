@@ -35,6 +35,11 @@ function Banquets() {
       <PhotoBlock img={IMG.banquetTables} title={l(B.title)} line={l(SIMPLE.banqD)} h1 tall compact><ContactLinks subject={l(B.form.msg)} /></PhotoBlock>
       <ol className="mx-auto grid max-w-6xl gap-3 px-5 pt-8 sm:grid-cols-3">{STEPS.map((s, i) => <li key={s.en} className="flex items-center gap-3 border-t-2 border-ember pt-3"><span className="font-display text-3xl font-black text-ember tabular-nums">0{i + 1}</span><span className="text-sm font-semibold">{l(s)}</span></li>)}</ol>
       <ul className="mx-auto grid max-w-6xl gap-x-8 px-5 py-8 text-sm sm:grid-cols-3">{B.facts.map((x, i) => { const I = factIcons[i]!; return <li key={x.en} className="flex min-h-14 items-center gap-3 border-b border-coal/20"><I className="h-5 w-5 shrink-0 text-ember" />{l(x)}</li>; })}</ul>
+      <section className="relative h-[42svh] min-h-[260px] overflow-hidden bg-coal text-paper md:h-[56vh]">
+        <img src={IMG.hallWedding} alt={l(B.title)} width={1400} height={788} loading="lazy" decoding="async" className="photo-grade absolute inset-0 h-full w-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-t from-coal/85 via-coal/20 to-transparent" aria-hidden="true" />
+        <p className="poster-type relative mx-auto flex h-full max-w-6xl items-end px-5 pb-7 text-[clamp(1.6rem,5vw,3rem)]">{l(B.hallCaption)}</p>
+      </section>
       <section id="request" className="scroll-mt-[60px] bg-paper-2 px-4 py-12 md:py-20">
         <h2 className="poster-type mx-auto max-w-3xl text-5xl md:text-7xl">{l(F.title)}</h2>
         <div className="mx-auto mt-5 flex max-w-3xl flex-wrap gap-2" role="group" aria-label={l(F.occasion)}>{B.occasions.map((o, i) => <button key={o.en} type="button" aria-pressed={f.occasion === i} onClick={() => setF({ ...f, occasion: i })} className={`min-h-11 border-[1.5px] px-4 text-sm font-medium transition ${f.occasion === i ? "border-ember bg-ember text-paper" : "border-coal/30 bg-paper hover:border-coal"}`}>{l(o)}</button>)}</div>

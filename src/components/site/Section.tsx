@@ -23,21 +23,16 @@ export const inputCls = "min-h-12 w-full min-w-0 rounded-[2px] border-[1.5px] bo
 export const goldBtn = "inline-flex min-h-[52px] items-center justify-center gap-2 rounded-[2px] bg-ember px-5 py-3 text-xs font-semibold uppercase tracking-[0.09em] text-paper transition hover:bg-coal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember active:translate-y-px";
 export const pillBtn = goldBtn;
 
-/** Shared inner-page opener: real photo in a framed slot, short promise, then action. */
-export function PhotoBlock({ img, title, line, children, eager = false, h1 = false, landscape = false, compact = false }: { img: string; title: string; line?: ReactNode; children?: ReactNode; eager?: boolean; h1?: boolean; tall?: boolean; landscape?: boolean; compact?: boolean }) {
+/** Shared inner-page opener: one photograph edge to edge, with the promise and the action laid over it — same language as the home hero. */
+export function PhotoBlock({ img, title, line, children, h1 = false }: { img: string; title: string; line?: ReactNode; children?: ReactNode; eager?: boolean; h1?: boolean; tall?: boolean; landscape?: boolean; compact?: boolean }) {
   return (
-    <section className={`bg-coal px-5 text-paper md:py-16 ${compact ? "py-6" : "py-10"}`}>
-      <div className={`mx-auto grid max-w-6xl items-center md:grid-cols-2 md:gap-14 ${compact ? "gap-4" : "gap-8"}`}>
-        {landscape ? (
-          <div className="mx-auto w-full max-w-[620px] bg-paper-2 p-2">
-            <img src={img} alt={title} loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : "auto"} decoding="async" width={787} height={546} className={`aspect-[3/2] w-full object-contain ${compact ? "max-h-32 md:max-h-none" : ""}`} />
-          </div>
-        ) : <ArchPhoto src={img} alt={title} width={1600} height={1067} eager={eager} className={`w-full md:aspect-[3/2] ${compact ? "aspect-[16/7]" : "aspect-[3/2]"}`} />}
-        <div className={landscape ? "md:order-first" : ""}>
-          <PosterHeading as={h1 ? "h1" : "h2"} className={compact ? "!text-5xl md:!text-7xl" : "!text-[clamp(3rem,10vw,6.5rem)]"}>{title}</PosterHeading>
-          {line && <div className={`${compact ? "mt-3" : "mt-5"} max-w-xl space-y-1 leading-relaxed text-paper/75`}>{line}</div>}
-          {children && <div className={`${compact ? "mt-4" : "mt-7"} flex flex-wrap gap-3`}>{children}</div>}
-        </div>
+    <section className="relative flex min-h-[62svh] items-end overflow-hidden bg-coal text-paper md:min-h-[min(82svh,720px)]">
+      <img src={img} alt="" width={1600} height={1067} fetchPriority="high" decoding="async" className="absolute inset-0 h-full w-full object-cover" />
+      <div className="absolute inset-0 bg-gradient-to-t from-coal via-coal/60 to-coal/10" aria-hidden="true" />
+      <div className="relative mx-auto w-full max-w-6xl px-5 pb-9 pt-24 md:pb-14">
+        <PosterHeading as={h1 ? "h1" : "h2"} className="!text-[clamp(2.6rem,9vw,5rem)]">{title}</PosterHeading>
+        {line && <div className="mt-4 max-w-xl space-y-1 font-voice text-lg italic leading-snug text-paper/90 md:text-2xl">{line}</div>}
+        {children && <div className="mt-7 flex flex-wrap gap-3">{children}</div>}
       </div>
     </section>
   );

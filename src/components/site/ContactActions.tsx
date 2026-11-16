@@ -15,7 +15,6 @@ export function ContactLinks({ subject, sauna = false }: { subject: string; saun
       <Button asChild><a href={tel(sauna ? SAUNA_CONTACT_PHONE : MAIN_PHONE)}><Phone />{l(P.channels.call)}</a></Button>
       <Button asChild variant="outline"><a href={mailLink(subject, subject)}><Mail />{l(P.channels.email)}</a></Button>
     </div>
-    <p className="mt-3 text-sm leading-snug opacity-75">{l(P.channels.note)}</p>
   </div>;
 }
 

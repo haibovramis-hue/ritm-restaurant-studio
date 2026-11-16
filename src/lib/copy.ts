@@ -127,7 +127,7 @@ export const C = {
       tr("Labi, ka mums tuvumā ir šāda vieta.", "Хорошо, что рядом есть такое место.", "Good to have this place in the neighbourhood."),
     ],
   },
-  gallery: { title: tr("Galerija", "Галерея", "Gallery") },
+  gallery: { title: tr("Galerija", "Галерея", "Gallery"), sub: tr("Zāles, terases, dārzs un ogļu grils — tādi, kādi tie ir.", "Залы, террасы, сад и угольный гриль — такие, какие есть.", "Halls, terraces, the garden and the coal grill — just as they are.") },
   contacts: {
     eyebrow: tr("Kontakti", "Контакты", "Contacts"), title: tr("Gaidām ciemos", "Ждём в гости", "Come and visit"),
     address: tr("Adrese", "Адрес", "Address"), phone: tr("Restorāns", "Ресторан", "Restaurant"), sauna: tr("ZP Pirts", "ZP Pirts", "ZP Pirts"), contact: tr("kontaktpersona", "контактное лицо", "contact person"),
