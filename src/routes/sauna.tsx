@@ -46,7 +46,7 @@ function Sauna() {
         <div className={`${wrapCls} grid gap-8 md:grid-cols-12`}>
           <SectionLabel className="md:col-span-3 md:pt-4">{l(T.label)}</SectionLabel>
           <div className="md:col-span-9">
-            <p className="max-w-[28ch] font-display text-[clamp(1.7rem,3.2vw,2.75rem)] font-medium leading-[1.14] tracking-[-0.015em]">{l(T.lead)}</p>
+            <p className="max-w-[34ch] font-sans text-[clamp(1.4rem,2.2vw,1.95rem)] font-medium leading-[1.3] tracking-[-0.015em]">{l(T.lead)}</p>
             <p className="mt-8 max-w-[58ch] text-[18px] leading-relaxed text-muted-foreground">{l(T.body)}</p>
           </div>
         </div>

@@ -87,9 +87,9 @@ function Index() {
       {/* 1. One photograph, the name, one line, one action. */}
       <section className="relative flex min-h-[calc(100svh-var(--header-h)-var(--bar-h))] items-end overflow-hidden bg-coal text-paper md:min-h-[min(calc(100svh-var(--header-h)),880px)]">
         <img src={IMG.yardStoneHouse} alt={l(P.heroA11y)} width={2400} height={1325} fetchPriority="high" decoding="async" className="hero-photo absolute inset-0 h-full w-full object-cover object-[30%_50%]" />
-        <div className="absolute inset-0 bg-gradient-to-t from-coal via-coal/55 to-coal/20" aria-hidden="true" />
+        <div className="absolute inset-0 bg-gradient-to-t from-coal via-coal/60 to-coal/20" aria-hidden="true" /><div className="absolute inset-0 bg-gradient-to-r from-coal/55 via-coal/15 to-transparent" aria-hidden="true" />
         <div className={`${wrap} relative px-5 pb-10 pt-28 md:px-10 md:pb-16`}>
-          <p className="eyebrow hero-fade text-paper/70">{l(C.hero.eyebrow)}</p>
+          <p className="hero-fade text-[12px] font-semibold uppercase tracking-[0.18em] text-paper [text-shadow:0_1px_14px_rgb(0_0_0/0.75)] md:text-[13px]">{l(C.hero.eyebrow)}</p>
           <h1 aria-label={l(P.heroA11y)} className="mt-5 font-display text-[clamp(3.5rem,11.5vw,9.5rem)] font-light leading-[0.92] tracking-[-0.035em]">
             <span className="block overflow-hidden pb-[0.08em]"><span className="hero-line block">Zelta Pakavs</span></span>
           </h1>
