@@ -9,6 +9,7 @@ import { useBooking } from "@/lib/booking-context";
 import { ArchPhoto, PosterHeading, SectionLabel } from "@/components/site/Design";
 import { Button } from "@/components/ui/button";
 import { IMG } from "@/lib/images";
+import { DOOR, EVENING, HomeIntro } from "@/components/site/HomeIntro";
 import { MENU, findItem } from "@/lib/menu";
 import { SHARE_IMAGE, SITE_URL } from "@/lib/seo";
 import { rigaToday } from "@/lib/dates";
@@ -107,14 +108,16 @@ function Index() {
         </div>
       </section>
 
+      <HomeIntro />
+
       {/* 2. Three doors. */}
       <section className="section-pad bg-coal px-5 text-paper md:px-10">
         <div className={wrap}>
           {seasonal && <Link to="/banquets" search={{ occasion: "xmas" }} hash="request" className="line-link mb-12 text-ember md:mb-16">{l(P.season)}<ArrowRight aria-hidden="true" /></Link>}
           <div className="grid gap-x-8 gap-y-14 md:grid-cols-3">
-            <Door title={l(P.intents[0]!.title)} img={IMG.shashlikPlate} onClick={openBooking} detail={<OpenStatus className="!text-[15px] !font-normal" showDot={false} />} />
-            <Door title={l(P.intents[1]!.title)} img={IMG.banquetTables} to="/banquets" detail={l(P.intents[1]!.detail!)} />
-            <Door title={l(P.intents[2]!.title)} img={IMG.zpPirts} to="/sauna" detail={l(P.intents[2]!.detail!)} />
+            <Door title={l(P.intents[0]!.title)} img={IMG.shashlikPlate} onClick={openBooking} detail={l(DOOR[0]!)} />
+            <Door title={l(P.intents[1]!.title)} img={IMG.banquetTables} to="/banquets" detail={l(DOOR[1]!)} />
+            <Door title={l(P.intents[2]!.title)} img={IMG.zpPirts} to="/sauna" detail={l(DOOR[2]!)} />
           </div>
           <div className="mt-16 grid gap-x-8 border-t border-paper/12 md:mt-20 md:grid-cols-3">
             <Link to="/banquets" hash="memorial" className={quiet}><span><span className="block text-[17px]">{l(P.intents[3]!.title)}</span><span className="mt-1 block text-sm text-paper/50">{l(P.intents[3]!.detail!)}</span></span><ArrowUpRight strokeWidth={1.25} className="h-5 w-5 shrink-0 text-paper/40 transition-colors group-hover:text-ember" aria-hidden="true" /></Link>
@@ -177,7 +180,7 @@ function Index() {
           {[IMG.grillCoals2, IMG.hallWedding, IMG.gazebo, IMG.courtyardOven, IMG.banyaCabin].map((src, i) => (
             <figure key={src} className="w-[74vw] max-w-[400px] shrink-0 snap-start md:w-[30%]">
               <div className="aspect-[4/5] overflow-hidden bg-coal-2"><img src={src} alt="" loading="lazy" decoding="async" className="photo-grade h-full w-full object-cover" /></div>
-              <figcaption className="mt-4 text-[15px] text-paper/60">{l(P.evening[i]!)}</figcaption>
+              <figcaption className="mt-4 text-[15px] text-paper/60">{l(EVENING[i]!)}</figcaption>
             </figure>
           ))}
           <div className="w-1 shrink-0" aria-hidden="true" />

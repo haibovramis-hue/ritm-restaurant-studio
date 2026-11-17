@@ -25,7 +25,7 @@ export function Field({ label, children }: { label: string; children: ReactNode 
 }
 /** One input style for the whole site: a quiet box with a hairline, ember on focus. */
 export const inputCls = "min-h-[52px] w-full min-w-0 rounded-[2px] border border-coal/20 bg-paper px-4 py-3 text-base text-coal outline-none transition-colors placeholder:text-coal/35 hover:border-coal/40 focus:border-ember disabled:opacity-50";
-export const goldBtn = "inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full bg-ember px-7 py-3 text-[15px] font-medium text-paper transition-colors hover:bg-paper hover:text-coal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 active:translate-y-px";
+export const goldBtn = "inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full bg-ember px-7 py-3 text-[15px] font-medium text-paper transition-colors hover:bg-[oklch(0.55_0.17_40)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 active:translate-y-px";
 export const pillBtn = goldBtn;
 
 /** A photograph with a caption underneath: used for the second picture on inner pages. */

@@ -1,40 +1,57 @@
 import { pageHead } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
-import { useI18n } from "@/lib/i18n";
-import { C } from "@/lib/copy";
+import { tr, useI18n } from "@/lib/i18n";
+import { C, P } from "@/lib/copy";
 import { IMG } from "@/lib/images";
 import { GOOGLE_RATING, GOOGLE_REVIEWS, GOOGLE_REVIEWS_URL } from "@/lib/config";
 import { Reveal } from "@/components/site/Reveal";
 import { PhotoBlock, gutterCls, wrapCls } from "@/components/site/Section";
 import { InstagramStrip } from "@/components/site/InstagramStrip";
-import { PosterHeading, SectionLabel } from "@/components/site/Design";
+import { SectionLabel } from "@/components/site/Design";
 
 export const Route = createFileRoute("/gallery")({
   head: () => ({ ...pageHead("/gallery", "Galerija un mūsu stāsts — Zelta Pakavs", "Īstas Zelta Pakavs fotogrāfijas: zāles, terase, svinības un ogļu grils. Ģimenes restorāna stāsts kopš 1999. gada un viesu atsauksmes.") }),
   component: Gallery,
 });
 
+/** The story as the restaurant tells it on zeltapakavs.lv: the 1999 café on a former farm, the places it grew into, the flowers in summer. */
+const T = {
+  lead: tr(
+    "Neliela kafejnīca bijušās fermas teritorijā, kas izaugusi par savu mazo pilsētu.",
+    "Маленькое кафе на бывшей ферме, которое выросло в свой небольшой городок.",
+    "A small café on a former farm that grew into a little town of its own.",
+  ),
+  body: tr(
+    "1999. gadā viss sākās ar nelielu kafejnīcu. Šodien tās ir zāles, verandas, terases, telšu namiņi un mājiņas dārzā, bērnu laukums, grils pagalmā un pirts ar baseinu. Vasarā dārzā zied mūsu puķes.",
+    "В 1999 году всё началось с маленького кафе. Сегодня это залы, веранды, террасы, шатры и домики в саду, детская площадка, мангал во дворе и баня с бассейном. Летом в саду цветут наши цветы.",
+    "It began in 1999 with a small café. Today it is halls, verandas, terraces, garden tents and cabins, a playground, a grill in the yard and a banya with a pool. In summer our flowers bloom in the garden.",
+  ),
+  photosTitle: tr("Pagalms, zāles un galds", "Двор, залы и стол", "The yard, the halls and the table"),
+};
+
 function Gallery() {
   const { l, lang } = useI18n();
   const q = (t: string) => lang === "lv" ? `„${t}”` : lang === "ru" ? `«${t}»` : `“${t}”`;
-  const photos = [IMG.terrace, IMG.hallWedding, IMG.shashlikCoals, IMG.courtyardOven, IMG.banquetTables, IMG.gazebo, IMG.verandaLong, IMG.courtyardFountain, IMG.zpPirts, IMG.banyaCabin, IMG.merchantBeef, IMG.quizNight];
+  const photos = [IMG.courtyardFountain, IMG.verandaLong, IMG.shashlikCoals, IMG.banyaCabin, IMG.terrace, IMG.hallWedding, IMG.merchantBeef, IMG.courtyardOven, IMG.banquetTables];
   return (
     <>
-      <PhotoBlock img={IMG.courtyardOven} title={l(C.gallery.title)} line={l(C.gallery.sub)} h1 />
+      <PhotoBlock img={IMG.terrace} title={l(P.about)} line={l(C.gallery.sub)} h1 />
 
       <section id="about" className={`section-pad scroll-mt-[var(--header-h)] bg-paper text-coal ${gutterCls}`}>
-        <div className={`${wrapCls} grid gap-12 lg:grid-cols-2 lg:gap-20`}>
-          <div>
-            <SectionLabel>{l(C.story.eyebrow)}</SectionLabel>
-            <PosterHeading className="mt-5">{l(C.story.title)}</PosterHeading>
-            <p className="mt-7 max-w-[52ch] text-[17px] leading-relaxed text-muted-foreground">{l(C.story.text)}</p>
+        <div className={`${wrapCls} grid gap-8 md:grid-cols-12`}>
+          <SectionLabel className="md:col-span-3 md:pt-4">{l(C.story.eyebrow)}</SectionLabel>
+          <div className="md:col-span-9">
+            <p className="max-w-[24ch] font-display text-[clamp(2rem,4.4vw,3.75rem)] font-light leading-[1.08] tracking-[-0.025em]">{l(T.lead)}</p>
+            <p className="mt-8 max-w-[58ch] text-[18px] leading-relaxed text-muted-foreground">{l(T.body)}</p>
           </div>
-          <ol className="self-end border-t border-coal/15">{C.story.timeline.map((s) => <li key={s.y.en} className="grid grid-cols-1 items-baseline gap-2 sm:grid-cols-[11rem_1fr] sm:gap-6 border-b border-coal/15 py-6"><span className="font-display text-4xl font-light tracking-[-0.03em]">{l(s.y)}</span><span className="text-[17px] leading-snug">{l(s.t)}</span></li>)}</ol>
         </div>
       </section>
 
       <section className={`bg-paper pb-[clamp(4.5rem,10vw,9rem)] text-coal ${gutterCls}`}>
-        <div className={`${wrapCls} columns-2 gap-4 md:columns-3 md:gap-6`}>{photos.map((src) => <Reveal key={src} className="mb-4 break-inside-avoid md:mb-6"><img src={src} alt={l(C.gallery.title)} loading="lazy" decoding="async" className="photo-grade w-full" /></Reveal>)}</div>
+        <div className={wrapCls}>
+          <h2 className="eyebrow opacity-60">{l(T.photosTitle)}</h2>
+          <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6">{photos.map((src) => <Reveal key={src}><div className="aspect-[4/5] overflow-hidden bg-coal-2"><img src={src} alt={l(C.gallery.title)} loading="lazy" decoding="async" className="photo-grade h-full w-full object-cover" /></div></Reveal>)}</div>
+        </div>
       </section>
 
       <section className={`section-pad bg-paper-2 text-coal ${gutterCls}`}>
