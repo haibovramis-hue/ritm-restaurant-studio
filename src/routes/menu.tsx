@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { MenuBrowser } from "@/components/site/Menu";
 import { C } from "@/lib/copy";
 import { useI18n } from "@/lib/i18n";
-import { PosterHeading, SectionLabel } from "@/components/site/Design";
+import { SectionLabel } from "@/components/site/Design";
 
 export const Route = createFileRoute("/menu")({
   validateSearch: (search: Record<string, unknown>): { c?: string } => typeof search["c"] === "string" ? { c: search["c"] } : {},
@@ -15,7 +15,7 @@ function MenuPage() {
   const { c } = Route.useSearch();
   const { l } = useI18n();
   return <div className="bg-paper pb-20 text-coal">
-    <section className="border-b border-coal/20 px-5 py-10"><div className="mx-auto flex max-w-6xl items-center justify-between gap-6"><div><SectionLabel number="13">{l(C.menu.categories)}</SectionLabel><PosterHeading as="h1" className="mt-3">{l(C.nav.menu)}</PosterHeading></div></div></section>
+    <section className="px-5 pb-10 pt-16 md:px-10 md:pb-14 md:pt-24"><div className="mx-auto max-w-[1320px]"><SectionLabel>{l(C.menu.categories)}</SectionLabel><h1 className="mt-5 font-display text-[clamp(3rem,8vw,6rem)] font-light leading-[0.98] tracking-[-0.03em]">{l(C.nav.menu)}</h1></div></section>
     <MenuBrowser {...(c ? { categoryId: c } : {})} />
   </div>;
 }

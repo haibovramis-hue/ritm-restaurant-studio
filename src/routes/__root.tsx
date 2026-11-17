@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 
 function NotFoundComponent() {
   const { l } = useI18n();
-  return <div className="flex min-h-[70vh] items-center justify-center bg-paper px-5 py-16 text-coal"><div className="max-w-xl"><title>{l(SIMPLE.notFound)} — Zelta Pakavs</title><meta name="robots" content="noindex" /><p className="poster-type text-[10rem] text-ember">404</p><h1 className="poster-type mt-3 text-5xl">{l(SIMPLE.notFound)}</h1><Button asChild className="mt-8"><Link to="/">{l(SIMPLE.home)}</Link></Button></div></div>;
+  return <div className="flex min-h-[70vh] items-center justify-center bg-paper px-5 py-16 text-coal"><div className="max-w-xl"><title>{l(SIMPLE.notFound)} — Zelta Pakavs</title><meta name="robots" content="noindex" /><p className="poster-type text-[8rem] leading-none text-ember">404</p><h1 className="poster-type mt-3 text-5xl">{l(SIMPLE.notFound)}</h1><Button asChild className="mt-8"><Link to="/">{l(SIMPLE.home)}</Link></Button></div></div>;
 }
 
 function ErrorComponent({ error, reset }: ErrorComponentProps) {

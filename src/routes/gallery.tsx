@@ -5,7 +5,7 @@ import { C } from "@/lib/copy";
 import { IMG } from "@/lib/images";
 import { GOOGLE_RATING, GOOGLE_REVIEWS, GOOGLE_REVIEWS_URL } from "@/lib/config";
 import { Reveal } from "@/components/site/Reveal";
-import { PhotoBlock, SectionHead } from "@/components/site/Section";
+import { PhotoBlock, gutterCls, wrapCls } from "@/components/site/Section";
 import { InstagramStrip } from "@/components/site/InstagramStrip";
 import { PosterHeading, SectionLabel } from "@/components/site/Design";
 
@@ -17,12 +17,32 @@ export const Route = createFileRoute("/gallery")({
 function Gallery() {
   const { l, lang } = useI18n();
   const q = (t: string) => lang === "lv" ? `„${t}”` : lang === "ru" ? `«${t}»` : `“${t}”`;
+  const photos = [IMG.terrace, IMG.hallWedding, IMG.shashlikCoals, IMG.courtyardOven, IMG.banquetTables, IMG.gazebo, IMG.verandaLong, IMG.courtyardFountain, IMG.zpPirts, IMG.banyaCabin, IMG.merchantBeef, IMG.quizNight];
   return (
     <>
       <PhotoBlock img={IMG.courtyardOven} title={l(C.gallery.title)} line={l(C.gallery.sub)} h1 />
-      <section className="bg-paper px-5 py-14 text-coal md:py-20"><div className="mx-auto max-w-6xl"><div className="columns-2 gap-3 md:columns-3 md:gap-4">{[IMG.terrace, IMG.hallWedding, IMG.shashlikCoals, IMG.courtyardOven, IMG.banquetTables, IMG.gazebo, IMG.verandaLong, IMG.courtyardFountain, IMG.zpPirts, IMG.banyaCabin, IMG.merchantBeef, IMG.quizNight].map((src) => <Reveal key={src} className="mb-3 break-inside-avoid md:mb-4"><img src={src} alt={l(C.gallery.title)} loading="lazy" decoding="async" className="photo-grade w-full" /></Reveal>)}</div></div></section>
-      <section id="about" className="scroll-mt-[60px] bg-coal px-5 py-16 text-paper md:py-24"><div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-2"><div><SectionLabel number="">{l(C.story.eyebrow)}</SectionLabel><h2 className="poster-type mt-5 text-5xl md:text-7xl">{l(C.story.title)}</h2><p className="mt-6 leading-relaxed text-paper/70">{l(C.story.text)}</p></div><ol className="space-y-8 border-l border-brass/50 pl-7">{C.story.timeline.map((s) => <li key={s.y.en}><p className="font-display text-6xl font-black text-brass">{l(s.y)}</p><p className="mt-2 text-lg">{l(s.t)}</p></li>)}</ol></div></section>
-      <section className="bg-paper px-5 py-16 text-coal"><a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noreferrer" className="mx-auto mb-6 flex min-h-12 w-fit items-center gap-3 hover:text-ember"><span className="font-display text-4xl font-black text-ember">{GOOGLE_RATING} ★</span><span className="text-sm">{GOOGLE_REVIEWS} {l(C.reviews.badge)} →</span></a><div className="mx-auto flex max-w-6xl snap-x snap-mandatory gap-4 overflow-x-auto [scrollbar-width:none]">{C.reviews.items.map((r) => <blockquote key={r.en} className="w-[82%] shrink-0 snap-start border-t border-coal/20 py-5 font-voice text-lg italic sm:w-72">{q(l(r))}<footer className="mt-3 font-sans text-xs font-semibold uppercase not-italic tracking-[0.12em] text-muted-foreground">{l(C.reviews.source)}</footer></blockquote>)}</div></section>
+
+      <section id="about" className={`section-pad scroll-mt-[var(--header-h)] bg-paper text-coal ${gutterCls}`}>
+        <div className={`${wrapCls} grid gap-12 lg:grid-cols-2 lg:gap-20`}>
+          <div>
+            <SectionLabel>{l(C.story.eyebrow)}</SectionLabel>
+            <PosterHeading className="mt-5">{l(C.story.title)}</PosterHeading>
+            <p className="mt-7 max-w-[52ch] text-[17px] leading-relaxed text-muted-foreground">{l(C.story.text)}</p>
+          </div>
+          <ol className="self-end border-t border-coal/15">{C.story.timeline.map((s) => <li key={s.y.en} className="grid grid-cols-1 items-baseline gap-2 sm:grid-cols-[11rem_1fr] sm:gap-6 border-b border-coal/15 py-6"><span className="font-display text-4xl font-light tracking-[-0.03em]">{l(s.y)}</span><span className="text-[17px] leading-snug">{l(s.t)}</span></li>)}</ol>
+        </div>
+      </section>
+
+      <section className={`bg-paper pb-[clamp(4.5rem,10vw,9rem)] text-coal ${gutterCls}`}>
+        <div className={`${wrapCls} columns-2 gap-4 md:columns-3 md:gap-6`}>{photos.map((src) => <Reveal key={src} className="mb-4 break-inside-avoid md:mb-6"><img src={src} alt={l(C.gallery.title)} loading="lazy" decoding="async" className="photo-grade w-full" /></Reveal>)}</div>
+      </section>
+
+      <section className={`section-pad bg-paper-2 text-coal ${gutterCls}`}>
+        <div className={wrapCls}>
+          <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noreferrer" className="group inline-flex items-baseline gap-4"><span className="font-display text-6xl font-light tracking-[-0.03em] md:text-7xl">{GOOGLE_RATING}</span><span className="text-[15px] text-muted-foreground transition-colors group-hover:text-ember">{GOOGLE_REVIEWS} {l(C.reviews.badge)}</span></a>
+          <div className="snap-pad -mx-5 mt-12 flex snap-x snap-mandatory gap-10 overflow-x-auto px-5 md:-mx-10 md:px-10">{C.reviews.items.map((r) => <blockquote key={r.en} className="w-[80%] shrink-0 snap-start sm:w-80"><p className="font-voice text-[1.5rem] font-light italic leading-[1.3]">{q(l(r))}</p><footer className="eyebrow mt-5 opacity-50">{l(C.reviews.source)}</footer></blockquote>)}</div>
+        </div>
+      </section>
       <InstagramStrip />
     </>
   );

@@ -1,12 +1,12 @@
 import { pageHead } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import type { FormEvent } from "react";
-import { Check } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { S } from "@/lib/copy-pages";
 import { SAUNA_CONTACT, SAUNA_CONTACT_PHONE, SAUNA_PHONE, tel } from "@/lib/config";
-import { PhotoBlock, pillBtn } from "@/components/site/Section";
+import { CaptionPhoto, PhotoBlock, gutterCls, wrapCls } from "@/components/site/Section";
 import { ContactActions, ContactLinks, contactChannel, openContact } from "@/components/site/ContactActions";
+import { SectionLabel } from "@/components/site/Design";
 import { SIMPLE } from "@/lib/copy";
 import { IMG } from "@/lib/images";
 
@@ -20,23 +20,27 @@ function Sauna() {
   const submit = (event: FormEvent) => { event.preventDefault(); openContact(contactChannel(event), l(S.waMsg), l(S.waMsg), SAUNA_CONTACT_PHONE); };
   return (
     <>
-      <PhotoBlock img={IMG.zpPirts} title={l(S.title)} line={l(SIMPLE.saunaD)} h1 landscape compact><ContactLinks sauna subject={l(S.waMsg)} /></PhotoBlock>
-      <section className="bg-paper px-5 py-10 text-coal">
-        <ul className="mx-auto grid max-w-3xl grid-cols-1 gap-x-5 text-sm sm:grid-cols-2">{S.features.map((x) => <li key={x.en} className="flex min-h-14 gap-2 border-b border-coal/20 py-3"><Check className="mt-0.5 h-4 w-4 shrink-0 text-ember" />{l(x)}</li>)}</ul>
-        <p className="mx-auto mt-6 max-w-3xl text-muted-foreground">{l(S.food)}</p>
+      <PhotoBlock img={IMG.zpPirts} title={l(S.title)} line={l(SIMPLE.saunaD)} h1><ContactLinks sauna subject={l(S.waMsg)} /></PhotoBlock>
+
+      <section className={`section-pad bg-paper text-coal ${gutterCls}`}>
+        <div className={`${wrapCls} grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20`}>
+          <p className="max-w-[30ch] font-display text-[1.75rem] font-light leading-[1.2] tracking-[-0.02em] md:text-[2.25rem]">{l(S.food)}</p>
+          <ul className="grid gap-x-12 border-t border-coal/15 sm:grid-cols-2">{S.features.map((x) => <li key={x.en} className="flex min-h-[60px] items-center border-b border-coal/15 py-4 text-[17px]">{l(x)}</li>)}</ul>
+        </div>
       </section>
-      <section className="relative h-[42svh] min-h-[260px] overflow-hidden bg-coal text-paper md:h-[56vh]">
-        <img src={IMG.banyaCabin} alt={l(S.title)} width={1400} height={1866} loading="lazy" decoding="async" className="photo-grade absolute inset-0 h-full w-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-coal/85 via-coal/20 to-transparent" aria-hidden="true" />
-        <p className="poster-type relative mx-auto flex h-full max-w-6xl items-end px-5 pb-7 text-[clamp(1.6rem,5vw,3rem)]">{l(S.cabin)}</p>
-      </section>
-      <section id="book" className="scroll-mt-[60px] bg-pine px-4 py-12 text-paper md:py-20">
-        <form onSubmit={submit} className="mx-auto max-w-xl border border-paper/30 bg-paper p-6 text-coal md:p-8">
-          <p className="font-semibold">{l(S.price)}</p>
-          <p className="mt-3 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">ZP Pirts</p><a href={tel(SAUNA_PHONE)} className="inline-flex min-h-11 items-center font-display text-3xl font-bold">{SAUNA_PHONE}</a>
-          <p className="text-sm text-muted-foreground">{l(S.contact)}: {SAUNA_CONTACT}, <a href={tel(SAUNA_CONTACT_PHONE)} className="inline-flex min-h-11 items-center underline">{SAUNA_CONTACT_PHONE}</a></p>
-          <div className="mt-5"><ContactActions sauna /></div>
-        </form>
+
+      <section className={`bg-paper pb-[clamp(4.5rem,10vw,9rem)] text-coal ${gutterCls}`}><CaptionPhoto src={IMG.banyaCabin} alt={l(S.title)} caption={l(S.cabin)} /></section>
+
+      <section id="book" className={`section-pad scroll-mt-[var(--header-h)] bg-coal text-paper ${gutterCls}`}>
+        <div className={`${wrapCls} grid gap-12 lg:grid-cols-2 lg:gap-20`}>
+          <div>
+            <SectionLabel>ZP Pirts</SectionLabel>
+            <a href={tel(SAUNA_PHONE)} className="mt-5 block font-display text-[clamp(2.4rem,6vw,4.5rem)] font-light leading-none tracking-[-0.03em] transition-colors hover:text-ember">{SAUNA_PHONE}</a>
+            <p className="mt-8 text-[17px] text-paper/60">{l(S.contact)}: {SAUNA_CONTACT}, <a href={tel(SAUNA_CONTACT_PHONE)} className="text-paper underline decoration-paper/30 underline-offset-4 hover:decoration-ember">{SAUNA_CONTACT_PHONE}</a></p>
+            <p className="mt-2 text-[17px] text-paper/60">{l(S.price)}</p>
+          </div>
+          <form onSubmit={submit} className="self-end rounded-[2px] bg-paper p-6 text-coal md:p-8"><ContactActions sauna /></form>
+        </div>
       </section>
     </>
   );

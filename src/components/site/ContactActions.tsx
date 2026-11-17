@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { Copy, Mail, MessageCircle, Phone } from "lucide-react";
+import { Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { EMAIL, MAIN_PHONE, SAUNA_CONTACT_PHONE, SAUNA_WHATSAPP_CONFIRMED, WHATSAPP_CONFIRMED, mailLink, tel, waLink } from "@/lib/config";
 import { P } from "@/lib/copy";
@@ -10,10 +10,10 @@ export type ContactChannel = "call" | "email" | "whatsapp";
 /** Direct contact links do not require filling out a request form. */
 export function ContactLinks({ subject, sauna = false }: { subject: string; sauna?: boolean }) {
   const { l } = useI18n();
-  return <div className="w-full">
-    <div className="grid grid-cols-2 gap-3">
-      <Button asChild><a href={tel(sauna ? SAUNA_CONTACT_PHONE : MAIN_PHONE)}><Phone />{l(P.channels.call)}</a></Button>
-      <Button asChild variant="outline"><a href={mailLink(subject, subject)}><Mail />{l(P.channels.email)}</a></Button>
+  return <div>
+    <div className="flex flex-wrap gap-3">
+      <Button asChild><a href={tel(sauna ? SAUNA_CONTACT_PHONE : MAIN_PHONE)}>{l(P.channels.call)}</a></Button>
+      <Button asChild variant="outline"><a href={mailLink(subject, subject)}>{l(P.channels.email)}</a></Button>
     </div>
   </div>;
 }
@@ -38,9 +38,9 @@ export function ContactActions({ sauna = false, note }: { sauna?: boolean; note?
   return (
     <div className="sm:col-span-2">
       <div className={`grid gap-3 ${whatsappConfirmed ? "sm:grid-cols-3" : "sm:grid-cols-2"}`}>
-        <Button asChild className="w-full"><a href={tel(sauna ? SAUNA_CONTACT_PHONE : MAIN_PHONE)}><Phone />{l(P.channels.call)}</a></Button>
-        <Button type="submit" name="channel" value="email" variant="outline" className="w-full"><Mail />{l(P.channels.email)}</Button>
-        {whatsappConfirmed && <Button type="submit" name="channel" value="whatsapp" variant="secondary" className="w-full"><MessageCircle />WhatsApp</Button>}
+        <Button asChild className="w-full"><a href={tel(sauna ? SAUNA_CONTACT_PHONE : MAIN_PHONE)}>{l(P.channels.call)}</a></Button>
+        <Button type="submit" name="channel" value="email" variant="outline" className="w-full">{l(P.channels.email)}</Button>
+        {whatsappConfirmed && <Button type="submit" name="channel" value="whatsapp" variant="secondary" className="w-full">WhatsApp</Button>}
       </div>
       <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{note ?? l(P.channels.note)}</p>
       <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{l(P.channels.fallback)} {sauna ? SAUNA_CONTACT_PHONE : MAIN_PHONE} · {EMAIL} <button type="button" onClick={copyEmail} className="inline-flex min-h-8 items-center gap-1 align-middle font-semibold underline underline-offset-2"><Copy className="h-3 w-3" />{copied ? l(P.channels.copied) : l(P.channels.copy)}</button></p>

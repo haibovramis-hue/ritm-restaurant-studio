@@ -19,10 +19,10 @@ export function BookingProvider({ children }: { children: ReactNode }) {
       <Dialog.Root open={open} onOpenChange={change}>
         <Dialog.Portal>
           <Dialog.Overlay className="fixed inset-0 z-[60] bg-coal/75" />
-          <Dialog.Content aria-describedby={undefined} className="fixed inset-x-0 bottom-0 z-[70] max-h-[92dvh] overflow-y-auto border border-coal/25 bg-paper p-3 pb-[max(1rem,env(safe-area-inset-bottom))] md:inset-x-auto md:bottom-auto md:left-1/2 md:top-1/2 md:w-full md:max-w-3xl md:-translate-x-1/2 md:-translate-y-1/2">
+          <Dialog.Content aria-describedby={undefined} className="fixed inset-x-0 bottom-0 z-[70] max-h-[92dvh] overflow-y-auto rounded-t-[2px] bg-paper p-4 pb-[max(1rem,env(safe-area-inset-bottom))] md:inset-x-auto md:bottom-auto md:left-1/2 md:top-1/2 md:w-full md:max-w-3xl md:-translate-x-1/2 md:-translate-y-1/2">
             <div className="mb-2 flex items-center justify-between gap-2 px-2">
-              <Dialog.Title className="text-xs font-semibold uppercase tracking-[0.14em]">{l(C.booking.title)}</Dialog.Title>
-              <Dialog.Close className="grid h-11 w-11 place-items-center rounded-full border border-coal/25 hover:bg-coal hover:text-paper" aria-label={l(HOME.close)}><X /></Dialog.Close>
+              <Dialog.Title className="eyebrow opacity-60">{l(C.booking.title)}</Dialog.Title>
+              <Dialog.Close className="grid h-11 w-11 place-items-center rounded-full text-coal/60 transition-colors hover:text-coal" aria-label={l(HOME.close)}><X /></Dialog.Close>
             </div>
             <BookingForm />
           </Dialog.Content>
