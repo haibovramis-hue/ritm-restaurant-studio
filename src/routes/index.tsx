@@ -95,7 +95,7 @@ function Index() {
           </h1>
           <div className="hero-fade mt-8 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
             <p className="max-w-[30ch] text-[17px] leading-relaxed text-paper/85 md:text-xl">{l(C.hero.line)}</p>
-            <div className="flex flex-wrap items-center gap-x-7 gap-y-3">
+            <div className="hidden flex-wrap items-center gap-x-7 gap-y-3 md:flex">
               <Button type="button" onClick={openBooking}>{l(P.bookTable)}</Button>
               <Link to="/menu" className="line-link">{l(C.nav.menu)}<ArrowRight aria-hidden="true" /></Link>
             </div>
