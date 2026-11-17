@@ -12,17 +12,17 @@ const T = {
     "A yard on the road out to Jūrmala, where shashlik comes straight off the coals and every party gets its own table, tent or cabin.",
   ),
   body: tr(
-    "Zelta Pakavs ir zāles, verandas, terases, telšu namiņi un mājiņas dārzā, bērnu laukums un pirts ar baseinu. Šeit brauc vakariņot ar ģimeni, svinēt dzimšanas dienu un pulcēt simt viesus kāzās.",
-    "Zelta Pakavs — это залы, веранды, террасы, шатры и домики в саду, детская площадка и баня с бассейном. Сюда приезжают поужинать семьёй, отметить день рождения и собрать сто гостей на свадьбу.",
-    "Zelta Pakavs is halls, verandas, terraces, garden tents and cabins, a playground and a banya with a pool. People come for a family dinner, a birthday, or a hundred-guest wedding.",
+    "Zelta Pakavs ir zāles, verandas, terases, telšu namiņi un mājiņas dārzā, bērnu laukums un pirts ar baseinu. Šeit brauc vakariņot ar ģimeni, svinēt dzimšanas dienu un sēdēt pie liela galda ar savējiem.",
+    "Zelta Pakavs — это залы, веранды, террасы, шатры и домики в саду, детская площадка и баня с бассейном. Сюда приезжают поужинать семьёй, отметить день рождения и посидеть своей компанией за большим столом.",
+    "Zelta Pakavs is halls, verandas, terraces, garden tents and cabins, a playground and a banya with a pool. People come for a family dinner, a birthday, or a long table with their own crowd.",
   ),
 };
 
 /** The three doors on the home page: one honest line each. */
 export const DOOR = [
   tr("Grils, Kaukāza un mājas virtuve. Katru dienu no 12:00.", "Мангал, кавказская и домашняя кухня. Каждый день с 12:00.", "The grill, Caucasian and home cooking. Every day from 12:00."),
-  tr("Zāles līdz 100 viesiem, vasarā ar terasi līdz 300. Kāzas, jubilejas, korporatīvie vakari.", "Залы до 100 гостей, летом с террасой до 300. Свадьбы, юбилеи, корпоративы.", "Halls for 100, up to 300 with the summer terrace. Weddings, anniversaries, company evenings."),
-  tr("Pirts ar malku, apsildāms baseins un zāle 20 viesiem — tikai jūsu kompānijai.", "Парная на дровах, подогреваемый бассейн и зал на 20 гостей — только для вашей компании.", "A wood-fired steam room, a heated pool and a hall for 20, all yours for the evening."),
+  tr("Zāles, veranda un terases dārzā. Kāzas, jubilejas, korporatīvie vakari.", "Залы, веранда и террасы в саду. Свадьбы, юбилеи, корпоративы.", "Halls, a veranda and garden terraces. Weddings, anniversaries, company evenings."),
+  tr("Plaša pirts, baseins un zāle 20 viesiem — tikai jūsu kompānijai.", "Просторная парная, бассейн и зал на 20 гостей — только для вашей компании.", "A roomy steam room, a pool and a hall for 20, all yours for the evening."),
 ];
 
 /** Captions for the strip of real corners of the house, in the order the photographs are shown. */

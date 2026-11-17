@@ -18,17 +18,17 @@ export const Route = createFileRoute("/sauna")({
 /** Every statement here comes from the restaurant’s own banya page (zeltapakavs.lv/pirts) and its feature list. */
 const T = {
   label: tr("ZP Pirts", "ZP Pirts", "ZP Pirts"),
-  lead: tr("Īsta krievu pirts ar malku — visa jūsu kompānijas rīcībā.", "Настоящая русская баня на дровах — целиком в распоряжении вашей компании.", "A real wood-fired Russian banya, all yours for the evening."),
+  lead: tr("Īsta krievu pirts — visa jūsu kompānijas rīcībā.", "Настоящая русская баня — целиком в распоряжении вашей компании.", "A real Russian banya, all yours for the evening."),
   body: tr(
-    "Atsevišķa māja restorāna pagalmā: plaša pirts ar pēršanās galdu, liels apsildāms baseins un zāle divdesmit viesiem. Temperatūru pirtī un baseinā sagatavojam pēc jūsu vēlmēm — pasakiet iepriekš, kā jums patīk.",
-    "Отдельный дом во дворе ресторана: просторная парная со столом для парения, большой подогреваемый бассейн и зал на двадцать гостей. Температуру в парной и в бассейне готовим под вас — скажите заранее, как любите.",
-    "A house of its own in the restaurant yard: a roomy steam room with a table for the venik ritual, a big heated pool and a hall for twenty. We set the heat of the steam room and the pool to your taste: just tell us ahead.",
+    "Atsevišķa māja restorāna pagalmā: plaša pirts ar pēršanās galdu, baseins un zāle divdesmit viesiem. Temperatūru pirtī un baseinā sagatavojam pēc jūsu vēlmēm — pasakiet iepriekš, kā jums patīk.",
+    "Отдельный дом во дворе ресторана: просторная парная со столом для парения, бассейн и зал на двадцать гостей. Температуру в парной и в бассейне готовим под вас — скажите заранее, как любите.",
+    "A house of its own in the restaurant yard: a roomy steam room with a table for the steam ritual, a pool and a hall for twenty. We set the heat of the steam room and the pool to your taste: just tell us ahead.",
   ),
   eveningTitle: tr("Kā paiet vakars", "Как проходит вечер", "How the evening goes"),
   parts: [
-    { n: "01", t: tr("Pirts", "Парная", "The steam room"), d: tr("Kurinām ar malku. Bērza un ozola slotas, plašs galds pēršanai.", "Топим дровами. Берёзовые и дубовые веники, просторный стол для парения.", "Fired with wood. Birch and oak veniks, a wide table for the ritual.") },
-    { n: "02", t: tr("Baseins", "Бассейн", "The pool"), d: tr("Liels un apsildāms. Ūdens temperatūru noregulējam pēc jūsu lūguma.", "Большой и подогреваемый. Температуру воды выставляем по вашей просьбе.", "Big and heated. We set the water temperature the way you ask.") },
-    { n: "03", t: tr("Galds", "Стол", "The table"), d: tr("Zāle 20 viesiem ar kamīnu, TV un karaoke, terase ar grilu. Ēdienu pasūtiet restorānā — atnesīsim uz pirti.", "Зал на 20 гостей с камином, ТВ и караоке, терраса с грилем. Еду заказывайте в ресторане — принесём в баню.", "A hall for 20 with a fireplace, TV and karaoke, a terrace with a grill. Order from the restaurant and we bring it over.") },
+    { n: "01", t: tr("Pirts", "Парная", "The steam room"), d: tr("Plaša pirts ar īpašu galdu pēršanai. Temperatūru sagatavojam, kā jums patīk.", "Просторная парная со специальным столом для парения. Жар готовим так, как вы любите.", "A roomy steam room with a special table for the ritual. We set the heat the way you like it.") },
+    { n: "02", t: tr("Baseins", "Бассейн", "The pool"), d: tr("Ūdens temperatūru sagatavojam pēc jūsu lūguma.", "Температуру воды готовим по вашей просьбе.", "We set the water temperature the way you ask.") },
+    { n: "03", t: tr("Galds", "Стол", "The table"), d: tr("Zāle 20 viesiem ar dīvānu un TV, liela terase ar grilu. Ēdienu pasūtiet restorānā — atnesīsim uz pirti.", "Зал на 20 гостей с диваном и ТВ, большая терраса с грилем. Еду заказывайте в ресторане — принесём в баню.", "A hall for 20 with a sofa and TV, a big terrace with a grill. Order from the restaurant and we bring it over.") },
   ],
   includedTitle: tr("Jūsu rīcībā", "В вашем распоряжении", "Yours for the evening"),
   bookTitle: tr("Rezervēt pirti", "Забронировать баню", "Book the banya"),

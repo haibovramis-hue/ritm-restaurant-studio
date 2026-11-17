@@ -18,7 +18,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Zelta Pakavs — ģimenes restorāns Rīgā kopš 1999 · Grils, banketi, pirts" },
-      { name: "description", content: "Šašliks uz īstām oglēm, Kaukāza un mājas virtuve Imantā. Banketi līdz 100 viesiem, vasarā ar terasi līdz 300, un ZP Pirts ar baseinu." },
+      { name: "description", content: "Šašliks uz īstām oglēm, Kaukāza un mājas virtuve Imantā. Banketi, terases dārzā un ZP Pirts ar baseinu." },
       { property: "og:title", content: "Zelta Pakavs — ikdienai, svētkiem un banketiem" },
       { property: "og:description", content: "Šašliks uz oglēm, Kaukāza un mājas virtuve — pie viena liela galda. Jūrmalas gatve 80, Rīga." },
       { property: "og:url", content: `${SITE_URL}/` }, { property: "og:type", content: "website" }, { property: "og:locale", content: "lv_LV" },

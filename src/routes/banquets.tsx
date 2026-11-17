@@ -13,7 +13,7 @@ import { PosterHeading, SectionLabel } from "@/components/site/Design";
 import { IMG } from "@/lib/images";
 
 export const Route = createFileRoute("/banquets")({
-  head: () => ({ ...pageHead("/banquets", "Banketi un svinības Rīgā — Zelta Pakavs", "Kāzas, jubilejas un ģimenes svinības Zelta Pakavā. Zāles līdz 100 viesiem, vasarā kopā ar terasi līdz 300. Pieteikumi pa tālruni vai e-pastā.") }),
+  head: () => ({ ...pageHead("/banquets", "Banketi un svinības Rīgā — Zelta Pakavs", "Kāzas, jubilejas un ģimenes svinības Zelta Pakavā. Zāles, veranda un terases dārzā. Pieteikumi pa tālruni vai e-pastā.") }),
   validateSearch: (s: Record<string, unknown>): { occasion?: string } => (typeof s["occasion"] === "string" ? { occasion: s["occasion"] } : {}),
   component: Banquets,
 });
@@ -23,15 +23,15 @@ const T = {
   label: tr("Banketi", "Банкеты", "Banquets"),
   lead: tr("Viens liels galds visiem, kurus vēlaties redzēt blakus.", "Один большой стол для всех, кого вы хотите видеть рядом.", "One big table for everyone you want beside you."),
   body: tr(
-    "Kāzas, jubileja, kristības, korporatīvais vakars vai bērnu svētki. Zāles uzņem līdz 100 viesiem, vasarā kopā ar terasi — līdz 300. Galdu klājam no mūsu ēdienkartes: grils, uzkodas, siltie ēdieni. Stāvvieta ir sava un bezmaksas.",
-    "Свадьба, юбилей, крестины, корпоратив или детский праздник. Залы принимают до 100 гостей, летом вместе с террасой — до 300. Стол накрываем из нашего меню: мангал, закуски, горячее. Парковка своя и бесплатная.",
-    "A wedding, an anniversary, a christening, a company evening or a kids’ party. The halls take up to 100 guests, up to 300 in summer with the terrace. The table is laid from our own menu: the grill, starters, hot dishes. Parking is ours and free.",
+    "Kāzas, jubileja, kristības, korporatīvais vakars vai bērnu svētki. Ir zāles, iestiklota veranda un terases dārzā — vietu izvēlamies kopā ar jums. Galdu klājam no mūsu ēdienkartes: grils, uzkodas, siltie ēdieni. Stāvvieta ir sava un bezmaksas.",
+    "Свадьба, юбилей, крестины, корпоратив или детский праздник. Есть залы, застеклённая веранда и террасы в саду — место подберём вместе с вами. Стол накрываем из нашего меню: мангал, закуски, горячее. Парковка своя и бесплатная.",
+    "A wedding, an anniversary, a christening, a company evening or a kids’ party. There are halls, a glazed veranda and garden terraces, and we pick the place together with you. The table is laid from our own menu: the grill, starters, hot dishes. Parking is ours and free.",
   ),
   placesTitle: tr("Kur klāt galdu", "Где накрыть стол", "Where to lay the table"),
   places: [
-    { img: "hallWedding" as const, t: tr("Zāle", "Зал", "The hall"), d: tr("Slēgta zāle kāzām vai jubilejai — līdz 100 viesiem.", "Закрытый зал для свадьбы или юбилея — до 100 гостей.", "A closed hall for a wedding or an anniversary, up to 100 guests.") },
+    { img: "hallWedding" as const, t: tr("Zāle", "Зал", "The hall"), d: tr("Slēgta zāle kāzām vai jubilejai.", "Закрытый зал для свадьбы или юбилея.", "A closed hall for a wedding or an anniversary.") },
     { img: "verandaLong" as const, t: tr("Veranda", "Веранда", "The veranda"), d: tr("Iestiklota veranda ar skatu uz dārzu: garš galds ģimenei un draugiem.", "Застеклённая веранда с видом в сад: длинный стол для семьи и друзей.", "A glazed veranda looking onto the garden: one long table for family and friends.") },
-    { img: "gazebo" as const, t: tr("Dārzs", "Сад", "The garden"), d: tr("Vasarā — teltis un terases dārzā. Kopā ar zālēm uzņemam līdz 300 viesiem.", "Летом — шатры и террасы в саду. Вместе с залами принимаем до 300 гостей.", "In summer, tents and terraces in the garden. With the halls, up to 300 guests.") },
+    { img: "gazebo" as const, t: tr("Dārzs", "Сад", "The garden"), d: tr("Vasarā — teltis un terases dārzā, starp puķēm.", "Летом — шатры и террасы в саду, среди цветов.", "In summer, tents and terraces in the garden, among the flowers.") },
   ],
   stepsTitle: tr("Kā tas notiek", "Как это происходит", "How it works"),
   steps: [

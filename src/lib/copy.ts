@@ -1,6 +1,6 @@
 import { tr } from "./i18n";
 
-export const CAPACITY = tr("Zāles līdz 100 viesiem · vasarā kopā ar terasi līdz 300", "Залы до 100 гостей · летом вместе с террасой до 300", "Halls for up to 100 guests · up to 300 in summer including the terrace");
+export const CAPACITY = tr("Zāles, veranda un terases dārzā", "Залы, веранда и террасы в саду", "Halls, a veranda and garden terraces");
 
 export const C = {
   tagline: tr("Ikdienai, svētkiem un banketiem", "На каждый день, для праздников и банкетов", "For every day, celebrations and banquets"),
@@ -17,10 +17,10 @@ export const C = {
   hero: {
     eyebrow: tr("Ģimenes restorāns · Rīga, Imanta · kopš 1999", "Семейный ресторан · Рига, Иманта · с 1999 года", "Family restaurant · Riga, Imanta · since 1999"),
     line: tr("Šašliks uz oglēm, Kaukāza un mājas virtuve — pie viena liela galda.", "Шашлык на углях, кавказская и домашняя кухня — за одним большим столом.", "Charcoal shashlik, Caucasian and home cooking — around one big table."),
-    sub: tr("Ogļu grils, Kaukāza klasika, banketi līdz 100 viesiem un krievu pirts ar baseinu.", "Гриль на углях, кавказская классика, банкеты до 100 гостей и русская баня с бассейном.", "Charcoal grill, Caucasian classics, banquets up to 100 guests and a Russian banya with pool."),
+    sub: tr("Ogļu grils, Kaukāza klasika, banketi un krievu pirts ar baseinu.", "Гриль на углях, кавказская классика, банкеты и русская баня с бассейном.", "Charcoal grill, Caucasian classics, banquets and a Russian banya with pool."),
     tiles: [
       { t: tr("Rezervēt galdiņu", "Забронировать столик", "Book a table"), d: tr("Galds gaidīs jūs", "Столик будет ждать", "Your table, waiting") },
-      { t: tr("Bankets / svinības", "Банкет / праздник", "Banquet / celebration"), d: tr("10–100 viesi, vasarā līdz 300", "10–100 гостей, летом до 300", "10–100 guests, up to 300 in summer") },
+      { t: tr("Bankets / svinības", "Банкет / праздник", "Banquet / celebration"), d: tr("Zāles, veranda un terases dārzā", "Залы, веранда и террасы в саду", "Halls, a veranda and garden terraces") },
       { t: tr("Pirts kompānijai", "Баня для компании", "Banya for a group"), d: tr("Viss vakars jums", "Весь вечер ваш", "The whole evening yours") },
       { t: tr("Ēdiens līdzi", "Еда навынос", "Food to go"), d: tr("Grila plate 4 pers. €49", "Гриль-ассорти на 4 — €49", "Grill plate for 4 — €49") },
     ],
@@ -37,7 +37,7 @@ export const C = {
     title: tr("Liels galds ikvienam", "Большой стол для всех", "A big table for everyone"),
     items: [
       { t: tr("Banketi un svinības", "Банкеты и торжества", "Banquets & celebrations"), d: tr(`Kāzas, jubilejas, kristības un korporatīvie pasākumi. ${CAPACITY.lv}.`, `Свадьбы, юбилеи, крестины и корпоративы. ${CAPACITY.ru}.`, `Weddings, anniversaries, christenings and corporate events. ${CAPACITY.en}.`), cta: tr("Pieteikt banketu", "Заказать банкет", "Request a banquet") },
-      { t: tr("ZP Pirts — privāta pirts jūsu kompānijai", "ZP Pirts — частная баня для вашей компании", "ZP Pirts — a private banya for your group"), d: tr("Tikai jūsu kompānijai: malkas pirts, liels apsildāms baseins, banketa telpa 20 personām ar karaoke, guļamistabas un BBQ terase. Ēdiens no mūsu virtuves.", "Только для вашей компании: баня на дровах, большой подогреваемый бассейн, банкетная комната на 20 с караоке, спальни и терраса с BBQ. Еда с нашей кухни.", "For your group only: wood-fired banya, big heated pool, banquet room for 20 with karaoke, bedrooms and BBQ terrace. Food from our kitchen."), cta: tr("Apskatīt pirti", "Смотреть баню", "See the banya") },
+      { t: tr("ZP Pirts — privāta pirts jūsu kompānijai", "ZP Pirts — частная баня для вашей компании", "ZP Pirts — a private banya for your group"), d: tr("Tikai jūsu kompānijai: krievu pirts, baseins, banketa telpa 20 personām, guļamistabas un BBQ terase. Ēdiens no mūsu virtuves.", "Только для вашей компании: русская баня, бассейн, банкетная комната на 20, спальни и терраса с BBQ. Еда с нашей кухни.", "For your group only: Russian banya, pool, banquet room for 20, bedrooms and BBQ terrace. Food from our kitchen."), cta: tr("Apskatīt pirti", "Смотреть баню", "See the banya") },
       { t: tr("Ikdienas grils un mājas virtuve", "Гриль и домашняя кухня каждый день", "Everyday grill & home cooking"), d: tr("Šašliki uz oglēm, hinkali, soļanka un lielas porcijas. Piektdienās viktorīnas, sestdienās dzīvā mūzika.", "Шашлык на углях, хинкали, солянка и большие порции. По пятницам квизы, по субботам живая музыка.", "Shashlik over coals, khinkali, solyanka and big portions. Quiz nights on Fridays, live music on Saturdays."), cta: tr("Skatīt ēdienkarti", "Смотреть меню", "View the menu") },
       { t: tr("Grils līdzņemšanai", "Гриль навынос", "Grill to go"), d: tr("Grilētas gaļas plate 4 personām — €49. Šašliki līdzi ballītei, vasarnīcai vai vakariņām mājās.", "Мясное ассорти на гриле на 4 персоны — €49. Шашлык навынос — на дачу, на праздник, домой.", "Grilled meat plate for 4 — €49. Shashlik to go for the party, the dacha or dinner at home."), cta: tr("Pasūtīt līdzi", "Заказать навынос", "Order to go") },
     ],
@@ -164,7 +164,7 @@ export const SIMPLE = {
   xmasD: tr("Korporatīvie vakari un ģimenes svētki. Rezervējiet datumu jau tagad.", "Корпоративы и семейные праздники. Бронируйте дату уже сейчас.", "Company parties and family celebrations. Reserve your date now."),
   sigT: tr("Ko pasūtīt pirmo reizi", "Что заказать в первый раз", "What to order first"),
   banqT: tr("Svinības pie liela galda", "Праздник за большим столом", "Celebrations around one big table"),
-  banqD: tr("Zāles līdz 100 viesiem, vasarā ar terasi — līdz 300.", "Залы до 100 гостей, летом с террасой — до 300.", "Halls for up to 100 guests, up to 300 in summer with the terrace."),
+  banqD: tr("Zāles, veranda un terases dārzā — jūsu svētkiem.", "Залы, веранда и террасы в саду — для вашего праздника.", "Halls, a veranda and garden terraces for your celebration."),
   banqB: tr("Pieteikt banketu", "Заказать банкет", "Request a banquet"),
   saunaT: tr("Krievu pirts ar baseinu", "Русская баня с бассейном", "Russian banya with a pool"),
   saunaD: tr("Viss vakars — tikai jūsu kompānijai.", "Весь вечер — только для вашей компании.", "The whole evening — just for your group."),
@@ -187,7 +187,7 @@ export const P = {
   eveningTitle: tr("Vakars pie mums", "Вечер у нас", "An evening with us"),
   evening: [tr("Grils", "Гриль", "Grill"), tr("Zāle", "Зал", "Hall"), tr("Terase", "Терраса", "Terrace"), tr("Svinības", "Праздники", "Celebrations"), tr("ZP Pirts", "ZP Pirts", "ZP Pirts")],
   stats: [{ n: "1999", t: tr("gads, kad sākām", "год основания", "year we opened") }, { n: "100", t: tr("viesi zālē", "гостей в зале", "guests in the hall") }, { n: "300", t: tr("viesi terasē vasarā", "гостей на террасе летом", "guests on the summer terrace") }],
-  terraceCaption: tr("Vasarā ar terasi — līdz 300 viesiem", "Летом с террасой — до 300 гостей", "In summer with the terrace — up to 300 guests"),
+  terraceCaption: tr("Vasarā — terases un teltis dārzā", "Летом — террасы и шатры в саду", "In summer, terraces and tents in the garden"),
   about: tr("Par mums", "О нас", "About"),
   heroA11y: tr("Zelta Pakavs — restorāns ar ogļu grilu Imantā", "Zelta Pakavs — ресторан с угольным грилем в Иманте", "Zelta Pakavs — a charcoal-grill restaurant in Imanta"),
   bookTable: tr("Rezervēt galdiņu", "Забронировать столик", "Book a table"),
@@ -196,14 +196,14 @@ export const P = {
     tr("Šašliks uz oglēm", "Шашлык на углях", "Charcoal shashlik"),
     tr("Kaukāza virtuve", "Кавказская кухня", "Caucasian cooking"),
     tr("Mājas virtuve", "Домашняя кухня", "Home cooking"),
-    tr("Banketi līdz 100 viesiem", "Банкеты до 100 гостей", "Banquets for up to 100"),
-    tr("Vasarā ar terasi — līdz 300", "Летом с террасой — до 300", "Up to 300 with the summer terrace"),
+    tr("Banketi un svinības", "Банкеты и праздники", "Banquets and celebrations"),
+    tr("Vasarā — terases dārzā", "Летом — террасы в саду", "Garden terraces in summer"),
     tr("Pirts ar baseinu", "Баня с бассейном", "Sauna with pool"),
     tr("Bezmaksas stāvvieta", "Бесплатная парковка", "Free parking"),
   ],
   intents: [
     { title: tr("Vakariņas uz oglēm", "Ужин на углях", "Dinner over the coals") },
-    { title: tr("Svinības un banketi", "Праздники и банкеты", "Celebrations & banquets"), detail: tr("Zāles līdz 100 viesiem, vasarā terase līdz 300", "Залы до 100 гостей, летом терраса до 300", "Halls for 100, the summer terrace for 300") },
+    { title: tr("Svinības un banketi", "Праздники и банкеты", "Celebrations & banquets"), detail: tr("Zāles, veranda un terases dārzā", "Залы, веранда и террасы в саду", "Halls, a veranda and garden terraces") },
     { title: tr("Pirts ar baseinu", "Баня с бассейном", "Sauna with pool"), detail: tr("ZP Pirts — tikai jūsu kompānijai", "ZP Pirts — только для вашей компании", "ZP Pirts — yours alone for the evening") },
     { title: tr("Bēru mielasts", "Поминальный обед", "Memorial meal"), detail: tr("Mierīga zāle, parūpēsimies par visu", "Тихий зал, обо всём позаботимся сами", "A quiet hall; we take care of everything") },
     { title: tr("Līdzņemšanai", "Еда с собой", "Food to take home"), detail: tr("Izvēlieties ēdienkartē — sagatavosim uz vajadzīgo laiku", "Соберите заказ в меню — приготовим к вашему времени", "Pick your dishes — ready for the time you name") },

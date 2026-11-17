@@ -1,22 +1,24 @@
 import { describe, expect, it } from 'vitest';
 import { CAPACITY, C } from '@/lib/copy';
-import { B } from '@/lib/copy-pages';
+import { B, S } from '@/lib/copy-pages';
 
-describe('combined summer capacity', () => {
-  it('states 300 including the terrace, not on the terrace alone', () => {
+/** Guest capacity (100 / 300) is not on the restaurant's own pages, so the site names the places and claims no numbers. */
+describe('places instead of unverified capacity', () => {
+  it('names the places and states no guest numbers', () => {
     expect(CAPACITY).toEqual({
-      lv: 'Zāles līdz 100 viesiem · vasarā kopā ar terasi līdz 300',
-      ru: 'Залы до 100 гостей · летом вместе с террасой до 300',
-      en: 'Halls for up to 100 guests · up to 300 in summer including the terrace',
+      lv: 'Zāles, veranda un terases dārzā',
+      ru: 'Залы, веранда и террасы в саду',
+      en: 'Halls, a veranda and garden terraces',
     });
     expect(C.facts.at(-1)).toEqual(CAPACITY);
     expect(C.gallery.title.lv).toBe('Galerija');
-    expect(B.sub.lv).toContain(CAPACITY.lv);
     expect(B.sub.ru).toContain(CAPACITY.ru);
-    expect(B.sub.en).toContain(CAPACITY.en);
+    expect(C.hero.tiles[1]?.d).toEqual(CAPACITY);
   });
-  it('uses the requested short hero capacity', () => {
-    expect(C.hero.tiles[1]?.d).toEqual({ lv: '10–100 viesi, vasarā līdz 300', ru: '10–100 гостей, летом до 300', en: '10–100 guests, up to 300 in summer' });
+  it('carries no unverified claims anywhere in the copy', () => {
+    const all = JSON.stringify([C, B, S]);
+    expect(all).not.toMatch(/100 (vies|гост|guest)|līdz 300|до 300|up to 300/);
+    expect(all).not.toMatch(/malk|дров|wood-fired|apsild|подогрев|heated|kamīn|камин|fireplace|karaoke|караоке|slotas|веник|€15/i);
   });
 });
 describe('banquet form copy', () => {
