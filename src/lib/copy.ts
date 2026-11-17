@@ -211,7 +211,7 @@ export const P = {
   tonight: tr("Šovakar", "Сегодня вечером", "Tonight"),
   season: tr("Ziemassvētki un Jaungads — rezervējiet datumu", "Рождество и Новый год — бронируйте дату", "Christmas and New Year — book your date"),
   chefTitle: tr("No oglēm, no sirds", "С углей и от души", "From the coals, from the heart"),
-  chefSub: tr("Deviņi ēdieni, ar kuriem pie mums parasti sāk.", "Девять блюд, с которых у нас обычно начинают.", "Nine dishes our guests usually start with."),
+  chefSub: tr("Tas, kā dēļ pie mums brauc.", "То, за чем к нам приезжают.", "What people come to us for."),
   dishesWord: tr("ēdieni", "блюд", "dishes"),
   categoriesWord: tr("sadaļas", "категорий", "categories"),
   fullMenu: tr("Visa ēdienkarte", "Всё меню", "Full menu"),

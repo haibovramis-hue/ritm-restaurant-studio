@@ -1,16 +1,15 @@
 ﻿import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
-import { ArrowRight, Navigation, Phone } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { OpenStatus } from "@/components/site/OpenStatus";
 import { useI18n } from "@/lib/i18n";
-import { C, P, SIMPLE } from "@/lib/copy";
+import { C, P } from "@/lib/copy";
 import { ADDRESS, EMAIL, FACEBOOK, INSTAGRAM, GOOGLE_RATING, GOOGLE_REVIEWS, GOOGLE_REVIEWS_URL, MAIN_PHONE, MAPS_DIRECTIONS_URL, WAZE_URL, tel } from "@/lib/config";
 import { useBooking } from "@/lib/booking-context";
-import { DishShowcase } from "@/components/site/DishShowcase";
 import { ArchPhoto, PosterHeading, SectionLabel } from "@/components/site/Design";
 import { Button } from "@/components/ui/button";
 import { IMG } from "@/lib/images";
-import { MENU } from "@/lib/menu";
+import { MENU, findItem } from "@/lib/menu";
 import { SHARE_IMAGE, SITE_URL } from "@/lib/seo";
 import { rigaToday } from "@/lib/dates";
 
@@ -41,27 +40,22 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-function EntryCard({ title, detail, img, to, onClick }: { title: string; detail?: ReactNode; img: string; to?: "/banquets" | "/sauna"; onClick?: () => void }) {
+/** One of the three doors into the house: a tall photograph, then a title and a line underneath. Nothing is printed over the picture. */
+function Door({ title, detail, img, to, onClick }: { title: string; detail?: ReactNode; img: string; to?: "/banquets" | "/sauna"; onClick?: () => void }) {
   const inner = <>
-    <img src={img} alt="" width={1600} height={900} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-    <span className="absolute inset-0 bg-gradient-to-t from-coal/90 via-coal/30 to-transparent" aria-hidden="true" />
-    <span className="relative flex w-full items-end justify-between gap-3 p-5 text-paper"><span className="min-w-0"><span className="poster-type block text-[clamp(2rem,7vw,3rem)]">{title}</span>{detail && <span className="mt-2 block text-[13px] leading-snug text-paper/80">{detail}</span>}</span><ArrowRight className="h-6 w-6 shrink-0 transition-transform group-hover:translate-x-1" aria-hidden="true" /></span>
+    <span className="block aspect-[4/5] overflow-hidden bg-coal-2"><img src={img} alt="" width={1200} height={1500} loading="lazy" decoding="async" className="photo-grade zoom-img h-full w-full object-cover" /></span>
+    <span className="mt-5 flex items-start justify-between gap-4">
+      <span className="min-w-0"><span className="poster-type block text-[1.75rem] md:text-[2rem]">{title}</span>{detail && <span className="mt-2 block text-[15px] leading-snug text-paper/55">{detail}</span>}</span>
+      <ArrowUpRight strokeWidth={1.25} className="mt-2 h-6 w-6 shrink-0 text-paper/45 transition-colors group-hover:text-ember" aria-hidden="true" />
+    </span>
   </>;
-  const cls = "group relative flex min-h-[240px] w-full items-end overflow-hidden bg-coal text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember md:min-h-[360px]";
+  const cls = "group block w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-4 focus-visible:ring-offset-coal";
   if (onClick) return <button type="button" onClick={onClick} className={cls}>{inner}</button>;
   return <Link to={to!} className={cls}>{inner}</Link>;
 }
-function IntentRow({ title, detail, thumb, to, hash, onClick }: { title: string; detail?: ReactNode; thumb?: string; to?: "/banquets" | "/sauna" | "/menu"; hash?: string; onClick?: () => void }) {
-  const inner = <>
-    <span className="min-w-0 flex-1"><span className="poster-type block text-[clamp(1.7rem,6vw,2.6rem)]">{title}</span>{detail && <span className="mt-2 block max-w-xl text-[13px] leading-snug opacity-75">{detail}</span>}</span>
-    {thumb && <ArchPhoto src={thumb} alt={title} width={787} height={854} className="h-24 w-20 shrink-0 self-center sm:h-28 sm:w-24" />}
-    <ArrowRight className="h-6 w-6 shrink-0 self-center transition-transform group-hover:translate-x-1" aria-hidden="true" />
-  </>;
-  const cls = "group flex min-h-[112px] w-full items-center gap-3 border-b border-coal/20 px-1 py-4 text-left transition-colors hover:bg-coal hover:text-paper focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ember sm:px-4";
-  if (onClick) return <button type="button" onClick={onClick} className={cls}>{inner}</button>;
-  return <Link to={to!} {...(hash ? { hash } : {})} className={cls}>{inner}</Link>;
-}
 
+/** What people come here for, as a plain price list. No carousel, no giant plates. */
+const SIGNATURE = ["plate4", "pork", "lamb", "lula-lamb", "ribs", "khinkali", "solyanka", "kharcho", "fondant"];
 const dishCount = MENU.reduce((n, c) => n + c.items.length, 0);
 
 function Index() {
@@ -84,81 +78,132 @@ function Index() {
   ];
   const reviews = [C.reviews.items[0]!, C.reviews.items[1]!, C.reviews.items[4]!];
   const quote = (text: string) => lang === "lv" ? `„${text}”` : lang === "ru" ? `«${text}»` : `“${text}”`;
+  const dishes = SIGNATURE.map((id) => findItem(id)).filter((x): x is NonNullable<typeof x> => Boolean(x));
+  const wrap = "mx-auto w-full max-w-[1320px]";
+  const quiet = "group flex min-h-[88px] items-center justify-between gap-4 border-b border-paper/12 py-5 md:border-b-0";
   return (
     <>
-      <section className="relative flex min-h-[calc(100svh-var(--header-h)-var(--bar-h))] items-end overflow-hidden bg-coal text-paper lg:min-h-[min(100svh,860px)]">
+      {/* 1. One photograph, the name, one line, one action. */}
+      <section className="relative flex min-h-[calc(100svh-var(--header-h)-var(--bar-h))] items-end overflow-hidden bg-coal text-paper md:min-h-[min(calc(100svh-var(--header-h)),880px)]">
         <img src={IMG.shashlikCoals} alt={l(C.menu.title)} width={1600} height={900} fetchPriority="high" decoding="async" className="hero-photo absolute inset-0 h-full w-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-coal via-coal/55 to-coal/10" aria-hidden="true" />
-        <div className="relative mx-auto w-full max-w-[1440px] px-5 pb-8 pt-24 lg:pb-16">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-brass sm:text-xs">{l(C.hero.eyebrow)}</p>
-          <h1 aria-label={l(P.heroA11y)} className="mt-3 font-display text-[clamp(3.6rem,17vw,9rem)] font-black uppercase leading-[0.85] tracking-[-0.04em]">
-            <span className="block overflow-hidden"><span className="hero-line block">Zelta</span></span><span className="block overflow-hidden"><span className="hero-line block">Pakavs</span></span>
+        <div className="absolute inset-0 bg-gradient-to-t from-coal via-coal/45 to-coal/5" aria-hidden="true" />
+        <div className={`${wrap} relative px-5 pb-10 pt-28 md:px-10 md:pb-16`}>
+          <p className="eyebrow hero-fade text-paper/70">{l(C.hero.eyebrow)}</p>
+          <h1 aria-label={l(P.heroA11y)} className="mt-5 font-display text-[clamp(3.5rem,11.5vw,9.5rem)] font-light leading-[0.92] tracking-[-0.035em]">
+            <span className="block overflow-hidden pb-[0.08em]"><span className="hero-line block">Zelta Pakavs</span></span>
           </h1>
-          <p className="mt-4 max-w-2xl font-voice text-lg italic leading-snug text-paper/90 md:text-2xl">{l(C.hero.line)}</p>
-          <div className="mt-6 grid grid-cols-2 gap-3 sm:max-w-md"><Button type="button" onClick={openBooking} className="px-2 text-xs">{l(P.bookTable)}</Button><Button asChild variant="outline" className="border-paper/70 px-2 text-xs"><Link to="/menu">{l(C.nav.menu)}</Link></Button></div>
-          <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noreferrer" className="mt-5 inline-flex min-h-11 items-center text-[13px] font-medium text-paper/85 hover:text-paper">{GOOGLE_RATING} ★ · {GOOGLE_REVIEWS} Google · Imanta · {lang === "lv" ? "kopš" : lang === "ru" ? "с" : "since"} 1999</a>
-        </div>
-      </section>
-      <section className="bg-coal px-5 pb-14 pt-6 text-paper md:pb-20 md:pt-10">
-        <div className="mx-auto max-w-[1440px]">
-          {seasonal && <Link to="/banquets" search={{ occasion: "xmas" }} hash="request" className="mb-5 flex min-h-14 items-center justify-between gap-3 border border-ember/60 px-4 py-3 text-sm font-semibold text-ember transition-colors hover:bg-ember hover:text-paper"><span>{l(P.season)}</span><ArrowRight className="shrink-0" /></Link>}
-          <div className="grid gap-3 md:grid-cols-3">
-            <EntryCard title={l(P.intents[0]!.title)} img={IMG.shashlikPlate} onClick={openBooking} detail={<OpenStatus />} />
-            <EntryCard title={l(P.intents[1]!.title)} img={IMG.banquetTables} to="/banquets" detail={l(P.intents[1]!.detail!)} />
-            <EntryCard title={l(P.intents[2]!.title)} img={IMG.zpPirts} to="/sauna" detail={l(P.intents[2]!.detail!)} />
+          <div className="hero-fade mt-8 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+            <p className="max-w-[30ch] text-[17px] leading-relaxed text-paper/85 md:text-xl">{l(C.hero.line)}</p>
+            <div className="flex flex-wrap items-center gap-x-7 gap-y-3">
+              <Button type="button" onClick={openBooking}>{l(P.bookTable)}</Button>
+              <Link to="/menu" className="line-link">{l(C.nav.menu)}<ArrowRight aria-hidden="true" /></Link>
+            </div>
           </div>
-          <div className="mt-4 border-t border-paper/15">
-            <IntentRow title={l(P.intents[3]!.title)} detail={l(P.intents[3]!.detail!)} to="/banquets" hash="memorial" />
-            <IntentRow title={l(P.intents[4]!.title)} detail={l(P.intents[4]!.detail!)} to="/menu" />
-          </div>
-          {event && <Link to="/events" className="mt-5 flex min-h-12 items-center gap-2 font-semibold text-ember">{l(P.tonight)}: {l(event[1])}<ArrowRight className="h-5 w-5" /></Link>}
-        </div>
-      </section>
-
-      <section className="section-pad bg-coal px-5 text-paper">
-        <div className="mx-auto mb-8 max-w-5xl">
-          <SectionLabel number="">{l(P.menuCaption)}</SectionLabel>
-          <PosterHeading className="mt-4">{l(P.chefTitle)}</PosterHeading>
-          <p className="mt-4 max-w-xl font-voice text-lg italic leading-snug text-paper/75 md:text-xl">{l(P.chefSub)}</p>
-        </div>
-        <DishShowcase />
-        <div className="mx-auto mt-10 max-w-5xl">
-          <Link to="/menu" className="group flex min-h-[72px] w-full items-center justify-between gap-4 border-2 border-brass px-6 py-4 transition-colors hover:bg-brass hover:text-coal">
-            <span className="min-w-0"><span className="poster-type block text-[clamp(1.6rem,5.5vw,2.4rem)]">{l(P.fullMenu)}</span><span className="mt-1 block text-[13px] text-paper/70 group-hover:text-coal/70">{dishCount} {l(P.dishesWord)} · {MENU.length} {l(P.categoriesWord)}</span></span>
-            <ArrowRight className="h-7 w-7 shrink-0 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-          </Link>
-        </div>
-      </section>
-
-      <section className="section-pad relative overflow-hidden bg-paper px-5 text-coal">
-        <div className="relative mx-auto max-w-6xl">
-          <SectionLabel number="">{l(P.storyCaption)}</SectionLabel>
-          <div className="mt-5 grid items-center gap-10 md:grid-cols-[1.15fr_.85fr]">
-            <div><PosterHeading>{l(P.storyHeading)}</PosterHeading><p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">{l(P.storyText)}</p><Button asChild variant="outline" className="mt-7"><Link to="/gallery">{l(P.about)}<ArrowRight /></Link></Button></div>
-            <div className="grid grid-cols-2 items-start gap-3"><ArchPhoto src={IMG.terrace} alt={l(C.gallery.title)} width={788} height={840} className="aspect-[3/4]" /><ArchPhoto src={IMG.hallEmpty} alt={l(C.nav.banquets)} width={787} height={1400} className="mt-8 aspect-[3/4]" /></div>
-          </div>
-          <div className="mt-16 border-t border-coal/20 pt-7">
-            <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noreferrer" className="inline-flex min-h-12 items-center gap-3 font-semibold hover:text-ember"><span className="font-display text-4xl font-black text-ember">{GOOGLE_RATING} ★</span><span>{GOOGLE_REVIEWS} {l(C.reviews.badge)}</span><ArrowRight /></a>
-            <div className="mt-5 grid md:grid-cols-3 md:gap-x-8">{reviews.map((review) => <blockquote key={review.en} className="border-t border-coal/20 py-5"><p className="font-voice text-lg italic leading-relaxed">{quote(l(review))}</p><footer className="mt-3 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">{l(C.reviews.source)}</footer></blockquote>)}</div>
+          <div className="hero-fade mt-10 flex flex-wrap items-center gap-x-8 gap-y-2 border-t border-paper/15 pt-5 text-[13px] text-paper/65">
+            <OpenStatus className="!text-[13px] !font-normal text-paper/85" />
+            <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noreferrer" className="inline-flex min-h-8 items-center hover:text-paper">{GOOGLE_RATING} ★ · {GOOGLE_REVIEWS} Google</a>
+            <span>{ADDRESS}, Imanta</span>
           </div>
         </div>
       </section>
 
-      <section className="bg-coal px-5 py-14 text-paper md:py-20"><div className="mx-auto max-w-[1440px]"><PosterHeading className="mb-8">{l(P.eveningTitle)}</PosterHeading><div className="snap-pad -mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-3">{[IMG.shashlikCoals, IMG.hallWedding, IMG.gazebo, IMG.banquetTables, IMG.zpPirts].map((src, i) => <figure key={src} className="relative aspect-[4/5] w-[72vw] max-w-[360px] shrink-0 snap-start overflow-hidden bg-coal-2 md:w-[26%]"><img src={src} alt="" loading="lazy" decoding="async" className="photo-grade h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-t from-coal/80 via-transparent to-transparent" aria-hidden="true" /><figcaption className="poster-type absolute bottom-4 left-4 text-3xl">{l(P.evening[i]!)}</figcaption></figure>)}</div></div></section>
-
-      <section className="border-t border-paper/15 bg-coal px-5 py-12 text-paper md:py-16"><dl className="mx-auto grid max-w-6xl grid-cols-3 divide-x divide-paper/15 text-center">{P.stats.map((s) => <div key={s.n} className="px-2"><dt className="font-display text-[clamp(2.5rem,9vw,5.5rem)] font-black leading-none tabular-nums text-brass">{s.n}</dt><dd className="mt-2 text-[11px] font-semibold uppercase tracking-[0.12em] md:text-sm">{l(s.t)}</dd></div>)}</dl></section>
-
-      <section id="contacts" className="section-pad scroll-mt-[60px] bg-coal px-5 text-paper">
-        <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-2">
-          <div><SectionLabel number="">{l(P.visitCaption)}</SectionLabel><PosterHeading className="mt-4">{l(C.contacts.title)}</PosterHeading><p className="mt-6 text-xl">{ADDRESS} (Imanta)</p><p className="mt-2 text-paper/70">{l(P.freeParking)}</p><OpenStatus className="mt-4 text-paper" />
-            <div className="mt-7 flex flex-wrap gap-3"><Button asChild><a href={MAPS_DIRECTIONS_URL} target="_blank" rel="noreferrer"><Navigation />{l(C.contacts.route)}</a></Button><Button asChild variant="outline" className="border-paper/50"><a href={WAZE_URL} target="_blank" rel="noreferrer">Waze</a></Button><Button asChild variant="outline" className="border-paper/50"><a href={tel(MAIN_PHONE)}><Phone />{MAIN_PHONE}</a></Button></div>
+      {/* 2. Three doors. */}
+      <section className="section-pad bg-coal px-5 text-paper md:px-10">
+        <div className={wrap}>
+          {seasonal && <Link to="/banquets" search={{ occasion: "xmas" }} hash="request" className="line-link mb-12 text-ember md:mb-16">{l(P.season)}<ArrowRight aria-hidden="true" /></Link>}
+          <div className="grid gap-x-8 gap-y-14 md:grid-cols-3">
+            <Door title={l(P.intents[0]!.title)} img={IMG.shashlikPlate} onClick={openBooking} detail={<OpenStatus className="!text-[15px] !font-normal" showDot={false} />} />
+            <Door title={l(P.intents[1]!.title)} img={IMG.banquetTables} to="/banquets" detail={l(P.intents[1]!.detail!)} />
+            <Door title={l(P.intents[2]!.title)} img={IMG.zpPirts} to="/sauna" detail={l(P.intents[2]!.detail!)} />
           </div>
-          <div className="self-end border-t border-paper/20">{hoursRows.map((row) => <div key={row.days.en} className={`flex min-h-16 items-center justify-between gap-4 border-b border-paper/20 px-3 py-4 text-sm ${row.active ? "border-l-2 border-l-ember bg-coal-2 font-semibold" : ""}`}><span>{l(row.days)}</span><span className="whitespace-nowrap tabular-nums">{row.hours}</span></div>)}</div>
+          <div className="mt-16 grid gap-x-8 border-t border-paper/12 md:mt-20 md:grid-cols-3">
+            <Link to="/banquets" hash="memorial" className={quiet}><span><span className="block text-[17px]">{l(P.intents[3]!.title)}</span><span className="mt-1 block text-sm text-paper/50">{l(P.intents[3]!.detail!)}</span></span><ArrowUpRight strokeWidth={1.25} className="h-5 w-5 shrink-0 text-paper/40 transition-colors group-hover:text-ember" aria-hidden="true" /></Link>
+            <Link to="/menu" className={quiet}><span><span className="block text-[17px]">{l(P.intents[4]!.title)}</span><span className="mt-1 block text-sm text-paper/50">{l(P.intents[4]!.detail!)}</span></span><ArrowUpRight strokeWidth={1.25} className="h-5 w-5 shrink-0 text-paper/40 transition-colors group-hover:text-ember" aria-hidden="true" /></Link>
+            {event && <Link to="/events" className={quiet}><span><span className="block text-[17px]">{l(P.tonight)}</span><span className="mt-1 block text-sm text-paper/50">{l(event[1])}</span></span><ArrowUpRight strokeWidth={1.25} className="h-5 w-5 shrink-0 text-paper/40 transition-colors group-hover:text-ember" aria-hidden="true" /></Link>}
+          </div>
+        </div>
+      </section>
+
+      {/* 3. The table: a price list, not a slideshow. */}
+      <section className="section-pad bg-paper px-5 text-coal md:px-10">
+        <div className={`${wrap} grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20`}>
+          <div>
+            <SectionLabel>{l(P.menuCaption)}</SectionLabel>
+            <PosterHeading className="mt-5">{l(P.chefTitle)}</PosterHeading>
+            <p className="mt-6 max-w-[34ch] text-[17px] leading-relaxed text-muted-foreground">{l(P.chefSub)}</p>
+            <Link to="/menu" className="line-link mt-8">{l(P.fullMenu)} · {dishCount} {l(P.dishesWord)}<ArrowRight aria-hidden="true" /></Link>
+          </div>
+          <ul className="border-t border-coal/15">
+            {dishes.map((d) => (
+              <li key={d.id} className="flex items-baseline justify-between gap-6 border-b border-coal/15 py-[18px]">
+                <span className="min-w-0"><span className="block text-[17px] leading-snug">{l(d.name)}</span>{l(d.desc) && <span className="mt-1 block text-sm text-muted-foreground">{l(d.desc)}</span>}</span>
+                <span className="shrink-0 whitespace-nowrap text-[17px] tabular-nums">{d.price}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* 4. The place. */}
+      <section className="section-pad bg-paper px-5 !pt-0 text-coal md:px-10">
+        <div className={wrap}>
+          <div className="grid items-end gap-10 md:grid-cols-12 md:gap-8">
+            <ArchPhoto src={IMG.terrace} alt={l(C.gallery.title)} width={1600} height={900} className="aspect-[4/3] md:col-span-7 md:aspect-[16/10]" />
+            <ArchPhoto src={IMG.verandaLong} alt={l(C.nav.banquets)} width={1400} height={1050} className="hidden aspect-[4/5] md:col-span-5 md:block" />
+          </div>
+          <div className="mt-12 grid gap-8 md:mt-16 md:grid-cols-12">
+            <SectionLabel className="md:col-span-3 md:pt-3">{l(P.storyCaption)}</SectionLabel>
+            <div className="md:col-span-8">
+              <PosterHeading>{l(P.storyHeading)}</PosterHeading>
+              <p className="mt-7 max-w-[56ch] text-[17px] leading-relaxed text-muted-foreground">{l(P.storyText)}</p>
+              <Link to="/gallery" className="line-link mt-7">{l(P.about)}<ArrowRight aria-hidden="true" /></Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Guests. */}
+      <section className="section-pad bg-paper-2 px-5 text-coal md:px-10">
+        <div className={wrap}>
+          <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noreferrer" className="group inline-flex items-baseline gap-4"><span className="font-display text-6xl font-light tracking-[-0.03em] md:text-7xl">{GOOGLE_RATING}</span><span className="text-[15px] text-muted-foreground transition-colors group-hover:text-ember">{GOOGLE_REVIEWS} {l(C.reviews.badge)}</span></a>
+          <div className="mt-12 grid gap-10 md:grid-cols-3 md:gap-12">{reviews.map((review) => <blockquote key={review.en}><p className="font-voice text-[1.6rem] font-light italic leading-[1.3]">{quote(l(review))}</p><footer className="eyebrow mt-5 opacity-50">{l(C.reviews.source)}</footer></blockquote>)}</div>
+        </div>
+      </section>
+
+      {/* 6. An evening here: a quiet strip of real corners of the house. */}
+      <section className="section-pad bg-coal text-paper">
+        <div className={`${wrap} px-5 md:px-10`}><PosterHeading>{l(P.eveningTitle)}</PosterHeading></div>
+        <div className="snap-pad mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 md:mt-14 md:gap-6 md:px-10">
+          {[IMG.grillCoals2, IMG.hallWedding, IMG.gazebo, IMG.courtyardOven, IMG.banyaCabin].map((src, i) => (
+            <figure key={src} className="w-[74vw] max-w-[400px] shrink-0 snap-start md:w-[30%]">
+              <div className="aspect-[4/5] overflow-hidden bg-coal-2"><img src={src} alt="" loading="lazy" decoding="async" className="photo-grade h-full w-full object-cover" /></div>
+              <figcaption className="mt-4 text-[15px] text-paper/60">{l(P.evening[i]!)}</figcaption>
+            </figure>
+          ))}
+          <div className="w-1 shrink-0" aria-hidden="true" />
+        </div>
+      </section>
+
+      {/* 7. Come over. */}
+      <section id="contacts" className="section-pad scroll-mt-[var(--header-h)] border-t border-paper/10 bg-coal px-5 text-paper md:px-10">
+        <div className={`${wrap} grid gap-14 md:grid-cols-2 md:gap-20`}>
+          <div>
+            <SectionLabel>{l(P.visitCaption)}</SectionLabel>
+            <PosterHeading className="mt-5">{l(C.contacts.title)}</PosterHeading>
+            <p className="mt-8 text-xl">{ADDRESS}, Imanta</p>
+            <p className="mt-2 text-paper/55">{l(P.freeParking)}</p>
+            <div className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-3">
+              <Button asChild><a href={MAPS_DIRECTIONS_URL} target="_blank" rel="noreferrer">{l(C.contacts.route)}</a></Button>
+              <a href={tel(MAIN_PHONE)} className="line-link">{MAIN_PHONE}</a>
+              <a href={WAZE_URL} target="_blank" rel="noreferrer" className="line-link">Waze</a>
+            </div>
+          </div>
+          <div className="self-end">
+            <OpenStatus className="mb-5 !text-[15px] !font-normal text-paper" />
+            <div className="border-t border-paper/15">{hoursRows.map((row) => <div key={row.days.en} className={`flex min-h-[60px] items-center justify-between gap-4 border-b border-paper/15 py-4 text-[15px] ${row.active ? "text-paper" : "text-paper/50"}`}><span>{l(row.days)}</span><span className="whitespace-nowrap tabular-nums">{row.hours}</span></div>)}</div>
+          </div>
         </div>
       </section>
     </>
   );
 }
-
-
-

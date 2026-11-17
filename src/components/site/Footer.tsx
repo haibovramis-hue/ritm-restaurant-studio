@@ -1,9 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import { Facebook, Instagram } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { C, P, SIMPLE } from "@/lib/copy";
 import { ADDRESS, EMAIL, FACEBOOK, INSTAGRAM, MAIN_PHONE, tel } from "@/lib/config";
-import { Horseshoe } from "./Horseshoe";
 
 export function Footer() {
   const { l } = useI18n();
@@ -11,22 +9,35 @@ export function Footer() {
     { to: "/menu", label: C.nav.menu }, { to: "/banquets", label: C.nav.banquets }, { to: "/sauna", label: C.nav.sauna },
     { to: "/gallery", label: P.about }, { to: "/events", label: C.nav.events },
   ] as const;
+  const item = "inline-flex min-h-10 items-center text-paper/70 transition-colors hover:text-paper";
   return (
-    <footer className="bg-coal px-5 pb-[calc(var(--bar-h)+16px+env(safe-area-inset-bottom))] pt-12 text-paper md:pb-10">
-      <div className="mx-auto max-w-[1440px]">
-        <div className="flex items-end gap-4 border-b border-paper/20 pb-7 text-brass">
-          <Horseshoe className="h-12 w-12 shrink-0 md:h-16 md:w-16" />
-          <p className="poster-type text-[clamp(4rem,16vw,12rem)] text-paper">Zelta Pakavs</p>
+    <footer className="border-t border-paper/10 bg-coal px-5 pb-[calc(var(--bar-h)+24px+env(safe-area-inset-bottom))] pt-16 text-paper md:px-10 md:pb-12 md:pt-20">
+      <div className="mx-auto max-w-[1320px]">
+        <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+          <div>
+            <p className="poster-type text-4xl">Zelta Pakavs</p>
+            <p className="mt-4 max-w-[26ch] text-[15px] text-paper/60">{ADDRESS}, Imanta</p>
+          </div>
+          <div className="text-[15px]">
+            <p className="eyebrow text-paper/45">{l(C.contacts.address)}</p>
+            <div className="mt-4 flex flex-col"><a href={tel(MAIN_PHONE)} className={item}>{MAIN_PHONE}</a><a href={`mailto:${EMAIL}`} className={`${item} break-all`}>{EMAIL}</a></div>
+          </div>
+          <div className="text-[15px]">
+            <p className="eyebrow text-paper/45">{l(C.contacts.hours)}</p>
+            <p className="mt-4 leading-8 text-paper/70">{l(SIMPLE.hours)}</p>
+          </div>
+          <nav className="flex flex-col text-[15px]" aria-label={l(C.nav.footerNav)}>
+            <p className="eyebrow mb-4 text-paper/45">{l(C.nav.main)}</p>
+            {links.map((x) => <Link key={x.to} to={x.to} className={item}>{l(x.label)}</Link>)}
+          </nav>
         </div>
-        <div className="grid gap-8 py-8 md:grid-cols-3">
-          <div><p className="text-xs font-semibold uppercase tracking-[0.14em] text-brass">{l(C.contacts.address)}</p><p className="mt-3">{ADDRESS} (Imanta)</p><a href={tel(MAIN_PHONE)} className="mt-2 inline-flex min-h-11 items-center hover:text-brass">{MAIN_PHONE}</a><a href={`mailto:${EMAIL}`} className="mt-1 flex min-h-11 items-center break-all hover:text-brass">{EMAIL}</a></div>
-          <div><p className="text-xs font-semibold uppercase tracking-[0.14em] text-brass">{l(C.contacts.hours)}</p><p className="mt-3 text-sm leading-7 text-paper/75">{l(SIMPLE.hours)}</p></div>
-          <nav className="flex flex-wrap content-start gap-x-5 md:justify-end" aria-label={l(C.nav.footerNav)}>{links.map((x) => <Link key={x.to} to={x.to} className="inline-flex min-h-11 min-w-11 items-center hover:text-brass">{l(x.label)}</Link>)}</nav>
-        </div>
-        <div className="flex flex-col gap-5 border-t border-paper/20 pt-6 text-sm text-paper/65 md:flex-row md:items-center md:justify-between">
-          <div><p>SIA Zp Plus, reģ. nr. 40203214219</p><p className="mt-1">© 1999–2026 Zelta Pakavs</p></div>
-          <div className="flex gap-2"><a href={INSTAGRAM} target="_blank" rel="noreferrer" aria-label="Instagram" className="grid h-11 w-11 place-items-center rounded-full border border-paper/30 hover:text-brass"><Instagram /></a><a href={FACEBOOK} target="_blank" rel="noreferrer" aria-label="Facebook" className="grid h-11 w-11 place-items-center rounded-full border border-paper/30 hover:text-brass"><Facebook /></a></div>
-          <p className="flex flex-wrap items-center gap-x-4 text-xs"><a href="https://www.zeltapakavs.lv/Privatuma_Politika.pdf" target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center underline underline-offset-2 hover:text-brass">{l(C.nav.privacy)}</a><span>{C.footer.concept}</span></p>
+        <div className="mt-16 flex flex-col gap-4 border-t border-paper/10 pt-6 text-[13px] text-paper/45 md:flex-row md:items-center md:justify-between">
+          <p>SIA Zp Plus, reģ. nr. 40203214219 · © 1999–2026 · {C.footer.concept}</p>
+          <p className="flex flex-wrap items-center gap-x-6">
+            <a href={INSTAGRAM} target="_blank" rel="noreferrer" className="inline-flex min-h-10 items-center hover:text-paper">Instagram</a>
+            <a href={FACEBOOK} target="_blank" rel="noreferrer" className="inline-flex min-h-10 items-center hover:text-paper">Facebook</a>
+            <a href="https://www.zeltapakavs.lv/Privatuma_Politika.pdf" target="_blank" rel="noreferrer" className="inline-flex min-h-10 items-center hover:text-paper">{l(C.nav.privacy)}</a>
+          </p>
         </div>
       </div>
     </footer>
