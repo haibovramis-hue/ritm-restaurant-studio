@@ -41,7 +41,7 @@ function Gallery() {
         <div className={`${wrapCls} grid gap-8 md:grid-cols-12`}>
           <SectionLabel className="md:col-span-3 md:pt-4">{l(C.story.eyebrow)}</SectionLabel>
           <div className="md:col-span-9">
-            <p className="max-w-[24ch] font-display text-[clamp(2rem,4.4vw,3.75rem)] font-light leading-[1.08] tracking-[-0.025em]">{l(T.lead)}</p>
+            <p className="max-w-[28ch] font-display text-[clamp(1.7rem,3.2vw,2.75rem)] font-medium leading-[1.14] tracking-[-0.015em]">{l(T.lead)}</p>
             <p className="mt-8 max-w-[58ch] text-[18px] leading-relaxed text-muted-foreground">{l(T.body)}</p>
           </div>
         </div>

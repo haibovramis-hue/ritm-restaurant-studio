@@ -24,6 +24,7 @@ import verandaLong from "@/assets/real/veranda-long.webp";
 import courtyardOven from "@/assets/real/courtyard-oven.webp";
 import courtyardFountain from "@/assets/real/courtyard-fountain.webp";
 import gazebo from "@/assets/real/gazebo.webp";
+import yardStoneHouse from "@/assets/real/yard-stone-house.webp";
 import scRibs from "@/assets/real/showcase-ribs.webp";
 import scJulienne from "@/assets/real/showcase-julienne.webp";
 import scSolyanka from "@/assets/real/showcase-solyanka.webp";
@@ -35,6 +36,6 @@ import scDraniki from "@/assets/real/showcase-draniki.webp";
 import scCheesecake from "@/assets/real/showcase-cheesecake.webp";
 export const IMG = {
   shashlikCoals, shashlikPlate, fondant, porkKnuckle, merchantBeef, dishesMix, interiorShelf, grillCoals2, hallEmpty,
-  seafoodPasta, banquetTables, birthday, celebrations, memorialPoster, zpPirts, terrace, quizNight, novemberEvents, scRibs, scJulienne, scSolyanka, scHomepot, scOctosalad, scCutlets, scGreek, scDraniki, scCheesecake, banyaCabin, hallWedding, verandaLong, courtyardOven, courtyardFountain, gazebo,
+  seafoodPasta, banquetTables, birthday, celebrations, memorialPoster, zpPirts, terrace, quizNight, novemberEvents, scRibs, scJulienne, scSolyanka, scHomepot, scOctosalad, scCutlets, scGreek, scDraniki, scCheesecake, banyaCabin, hallWedding, verandaLong, courtyardOven, courtyardFountain, gazebo, yardStoneHouse,
 };
 

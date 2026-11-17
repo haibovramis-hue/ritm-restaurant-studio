@@ -38,7 +38,7 @@ export function HomeIntro() {
       <div className={`${wrapCls} grid gap-8 md:grid-cols-12`}>
         <SectionLabel className="md:col-span-3 md:pt-4">{l(T.label)}</SectionLabel>
         <div className="md:col-span-9">
-          <p className="max-w-[30ch] font-display text-[clamp(1.9rem,3.6vw,3.1rem)] font-light leading-[1.1] tracking-[-0.025em]">{l(T.lead)}</p>
+          <p className="max-w-[32ch] font-display text-[clamp(1.6rem,2.9vw,2.5rem)] font-medium leading-[1.16] tracking-[-0.015em]">{l(T.lead)}</p>
           <p className="mt-8 max-w-[58ch] text-[18px] leading-relaxed text-muted-foreground">{l(T.body)}</p>
           <ul className="mt-12 grid gap-x-10 border-t border-coal/15 sm:grid-cols-3">{B.facts.map((x) => <li key={x.en} className="border-b border-coal/15 py-5 text-[17px] sm:border-b-0">{l(x)}</li>)}</ul>
         </div>
