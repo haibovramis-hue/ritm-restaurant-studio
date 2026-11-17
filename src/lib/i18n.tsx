@@ -22,7 +22,9 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   const hydrated = useRef(false);
   // Hydrate from storage once, before anything is persisted, so a fresh mount can never overwrite the saved choice with the default.
   useEffect(() => {
-    const s = readStoredLang();
+    const q = new URLSearchParams(location.search).get("lang");
+    if (isLang(q)) writeStoredLang(q);
+    const s = isLang(q) ? q : readStoredLang();
     if (s) setLangState(s);
     hydrated.current = true;
     const onStorage = (e: StorageEvent) => { if (e.key === LANG_KEY && isLang(e.newValue)) setLangState(e.newValue); };
