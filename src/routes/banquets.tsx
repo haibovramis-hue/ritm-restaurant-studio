@@ -8,7 +8,7 @@ import { C, SIMPLE } from "@/lib/copy";
 import { MAIN_PHONE, mailLink, tel } from "@/lib/config";
 import { fmtDate, rigaToday } from "@/lib/dates";
 import { Field, PhotoBlock, gutterCls, inputCls, pillBtn, wrapCls } from "@/components/site/Section";
-import { ContactActions, ContactLinks, contactChannel, openContact } from "@/components/site/ContactActions";
+import { ContactActions, contactChannel, openContact } from "@/components/site/ContactActions";
 import { PosterHeading, SectionLabel } from "@/components/site/Design";
 import { IMG } from "@/lib/images";
 
@@ -54,7 +54,7 @@ function Banquets() {
   const submit = (e: FormEvent) => { e.preventDefault(); openContact(contactChannel(e), message(), l(F.msg)); };
   return (
     <>
-      <PhotoBlock img={IMG.banquetTables} title={l(B.title)} line={l(SIMPLE.banqD)} h1><ContactLinks subject={l(B.form.msg)} /></PhotoBlock>
+      <PhotoBlock img={IMG.banquetTables} title={l(B.title)} line={l(SIMPLE.banqD)} h1 />
 
       {/* What we offer, said plainly. */}
       <section className={`section-pad bg-paper text-coal ${gutterCls}`}>

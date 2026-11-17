@@ -226,7 +226,7 @@ export const P = {
   visitCaption: tr("Kontakti", "Контакты", "Visit us"),
   freeParking: tr("Bezmaksas stāvvieta", "Бесплатная парковка", "Free parking"),
   channels: {
-    call: tr("Zvanīt un rezervēt", "Позвонить и забронировать", "Call to book"),
+    call: tr("Zvanīt", "Позвонить", "Call"),
     email: tr("Nosūtīt e-pastā", "Отправить на e-mail", "Send by e-mail"),
     fallback: tr("Ja e-pasta lietotne neatvērās, zvaniet", "Если почтовое приложение не открылось, позвоните", "If the mail app did not open, call"),
     copy: tr("kopēt adresi", "скопировать адрес", "copy address"),

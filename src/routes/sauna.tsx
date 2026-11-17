@@ -5,7 +5,7 @@ import { tr, useI18n } from "@/lib/i18n";
 import { S } from "@/lib/copy-pages";
 import { SAUNA_CONTACT, SAUNA_CONTACT_PHONE, SAUNA_PHONE, tel } from "@/lib/config";
 import { PhotoBlock, gutterCls, wrapCls } from "@/components/site/Section";
-import { ContactActions, ContactLinks, contactChannel, openContact } from "@/components/site/ContactActions";
+import { ContactActions, contactChannel, openContact } from "@/components/site/ContactActions";
 import { PosterHeading, SectionLabel } from "@/components/site/Design";
 import { SIMPLE } from "@/lib/copy";
 import { IMG } from "@/lib/images";
@@ -39,7 +39,7 @@ function Sauna() {
   const submit = (event: FormEvent) => { event.preventDefault(); openContact(contactChannel(event), l(S.waMsg), l(S.waMsg), SAUNA_CONTACT_PHONE); };
   return (
     <>
-      <PhotoBlock img={IMG.zpPirts} title={l(S.title)} line={l(SIMPLE.saunaD)} h1><ContactLinks sauna subject={l(S.waMsg)} /></PhotoBlock>
+      <PhotoBlock img={IMG.zpPirts} title={l(S.title)} line={l(SIMPLE.saunaD)} h1 />
 
       {/* What it is, in their own facts. */}
       <section className={`section-pad bg-paper text-coal ${gutterCls}`}>

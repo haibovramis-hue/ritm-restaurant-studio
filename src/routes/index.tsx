@@ -5,7 +5,6 @@ import { OpenStatus } from "@/components/site/OpenStatus";
 import { useI18n } from "@/lib/i18n";
 import { C, P } from "@/lib/copy";
 import { ADDRESS, EMAIL, FACEBOOK, INSTAGRAM, GOOGLE_RATING, GOOGLE_REVIEWS, GOOGLE_REVIEWS_URL, MAIN_PHONE, MAPS_DIRECTIONS_URL, WAZE_URL, tel } from "@/lib/config";
-import { useBooking } from "@/lib/booking-context";
 import { ArchPhoto, PosterHeading, SectionLabel } from "@/components/site/Design";
 import { Button } from "@/components/ui/button";
 import { IMG } from "@/lib/images";
@@ -42,7 +41,7 @@ export const Route = createFileRoute("/")({
 });
 
 /** One of the three doors into the house: a tall photograph, then a title and a line underneath. Nothing is printed over the picture. */
-function Door({ title, detail, img, to, onClick }: { title: string; detail?: ReactNode; img: string; to?: "/banquets" | "/sauna"; onClick?: () => void }) {
+function Door({ title, detail, img, to, onClick }: { title: string; detail?: ReactNode; img: string; to?: "/banquets" | "/sauna" | "/menu"; onClick?: () => void }) {
   const inner = <>
     <span className="block aspect-[4/5] overflow-hidden bg-coal-2"><img src={img} alt="" width={1200} height={1500} loading="lazy" decoding="async" className="photo-grade zoom-img h-full w-full object-cover" /></span>
     <span className="mt-5 flex items-start justify-between gap-4">
@@ -61,7 +60,6 @@ const dishCount = MENU.reduce((n, c) => n + c.items.length, 0);
 
 function Index() {
   const { l, lang } = useI18n();
-  const { openBooking } = useBooking();
   const [today, setToday] = useState("");
   const [weekday, setWeekday] = useState<number | null>(null);
   useEffect(() => {
@@ -95,10 +93,6 @@ function Index() {
           </h1>
           <div className="hero-fade mt-8 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
             <p className="max-w-[30ch] text-[17px] leading-relaxed text-paper/85 md:text-xl">{l(C.hero.line)}</p>
-            <div className="hidden flex-wrap items-center gap-x-7 gap-y-3 md:flex">
-              <Button type="button" onClick={openBooking}>{l(P.bookTable)}</Button>
-              <Link to="/menu" className="line-link">{l(C.nav.menu)}<ArrowRight aria-hidden="true" /></Link>
-            </div>
           </div>
           <div className="hero-fade mt-10 flex flex-wrap items-center gap-x-8 gap-y-2 border-t border-paper/15 pt-5 text-[13px] text-paper/65">
             <OpenStatus className="!text-[13px] !font-normal text-paper/85" />
@@ -115,7 +109,7 @@ function Index() {
         <div className={wrap}>
           {seasonal && <Link to="/banquets" search={{ occasion: "xmas" }} hash="request" className="line-link mb-12 text-ember md:mb-16">{l(P.season)}<ArrowRight aria-hidden="true" /></Link>}
           <div className="grid gap-x-8 gap-y-14 md:grid-cols-3">
-            <Door title={l(P.intents[0]!.title)} img={IMG.shashlikPlate} onClick={openBooking} detail={l(DOOR[0]!)} />
+            <Door title={l(P.intents[0]!.title)} img={IMG.shashlikPlate} to="/menu" detail={l(DOOR[0]!)} />
             <Door title={l(P.intents[1]!.title)} img={IMG.banquetTables} to="/banquets" detail={l(DOOR[1]!)} />
             <Door title={l(P.intents[2]!.title)} img={IMG.zpPirts} to="/sauna" detail={l(DOOR[2]!)} />
           </div>
